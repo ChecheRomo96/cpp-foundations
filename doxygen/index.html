@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>cpp-foundations: Cpp Foundations</title>
+<title>cpp-foundations: C++ Foundations</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,22 +69,146 @@ $(function() {
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Cpp Foundations </div></div>
+  <div class="headertitle"><div class="title">C++ Foundations </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="welcome"></a>
-Bienvenido</h1>
-<p>Este repositorio contiene:</p><ul>
-<li>Código base y ejercicios (carpeta <code>student/</code>)</li>
-<li>Pruebas unitarias (carpeta <code>tests/</code>)</li>
-<li>Reportes publicados (Unit Tests / Coverage / Doxygen)</li>
-<li>Material del curso en Doxygen (Topics)</li>
-</ul>
-<h1><a class="anchor" id="start_here"></a>
-Empezar aquí</h1>
+<div class="textblock"><p>Bienvenido al curso <b>C++ Foundations</b>.</p>
+<p>Este repositorio es un entorno educativo diseñado para enseñar C++ desde fundamentos reales, combinando:</p>
 <ul>
-<li>Ve a: course_cpp_foundations </li>
+<li>Lenguaje C++ moderno</li>
+<li>Control de versiones con Git</li>
+<li>Compilación profesional con CMake</li>
+<li>Pruebas automatizadas</li>
+<li>Documentación estructurada con Doxygen</li>
 </ul>
+<p>El objetivo del curso no es solo aprender sintaxis, sino aprender a <b>trabajar como ingeniero de software</b>.</p>
+<hr  />
+<h1><a class="anchor" id="mainpage_how_to_use"></a>
+Cómo usar este repositorio</h1>
+<p>Este repositorio forma parte activa del curso.</p>
+<p>Reglas fundamentales:</p><ul>
+<li>El estudiante <b>solo debe modificar</b> la carpeta <code>student/</code></li>
+<li>Todo el contenido teórico vive en la documentación (Doxygen)</li>
+<li>El flujo de trabajo con Git es parte de la evaluación</li>
+</ul>
+<p>El sistema de CI del repositorio valida automáticamente:</p><ul>
+<li>Que solo se modifique <code>student/</code></li>
+<li>Que el proyecto compile correctamente</li>
+<li>Que las pruebas (si existen) pasen</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="mainpage_navigation"></a>
+Navegación de la documentación</h1>
+<p>La documentación está organizada de la siguiente manera:</p>
+<ul>
+<li><b>Main Page</b> (esta página): visión general del curso</li>
+<li><b>Topics</b>: estructura jerárquica del curso</li>
+<li><b>Lesson Pages</b>: contenido detallado de cada lección</li>
+</ul>
+<p>Para navegar el curso:</p><ol type="1">
+<li>Abre el menú lateral</li>
+<li>Ve a la sección <b>Topics</b></li>
+<li>Ingresa al curso y a la lección correspondiente</li>
+</ol>
+<hr  />
+<h1><a class="anchor" id="mainpage_course"></a>
+Estructura del curso</h1>
+<p>Todo el contenido del curso está agrupado bajo:</p>
+<ul>
+<li><a class="el" href="group__cpp__course.html">C++ Foundations – Course</a></li>
+</ul>
+<p>Dentro de este grupo encontrarás las lecciones del curso, organizadas de forma progresiva.</p>
+<hr  />
+<h1><a class="anchor" id="mainpage_lessons"></a>
+Lecciones</h1>
+<h2><a class="anchor" id="mainpage_lesson00"></a>
+Lesson 00 – Configuración del entorno de trabajo</h2>
+<ul>
+<li><a class="el" href="group__cpp__lesson__00.html">Lesson 00 (grupo)</a></li>
+<li><a class="el" href="group__cpp__lesson__00.html">Configuración del entorno de trabajo (contenido)</a></li>
+</ul>
+<p>En esta lección aprenderás a:</p><ul>
+<li>Preparar tu entorno de desarrollo</li>
+<li>Instalar y verificar herramientas</li>
+<li>Compilar el proyecto localmente con CMake</li>
+<li>Ejecutar pruebas con CTest</li>
+<li>Entender el flujo de trabajo del repositorio</li>
+</ul>
+<p>Esta lección es <b>obligatoria antes de escribir cualquier código</b>.</p>
+<hr  />
+<h2><a class="anchor" id="mainpage_lesson01"></a>
+Lesson 01 – Tipos de datos, scope y calificadores</h2>
+<ul>
+<li><a class="el" href="group__cpp__lesson__01.html">Lesson 01 (grupo)</a></li>
+<li><a class="el" href="group__cpp__lesson__01.html">Tipos de datos, scope y calificadores</a></li>
+</ul>
+<p>En esta lección aprenderás:</p><ul>
+<li>Tipos de datos fundamentales en C++</li>
+<li>Alcance (scope) de variables</li>
+<li>Uso correcto de <code>const</code> y <code>static</code></li>
+<li>Conceptos de duración de vida y visibilidad</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="mainpage_repo_structure"></a>
+Estructura del repositorio</h1>
+<p>La estructura principal del repositorio es:</p>
+<div class="fragment"><div class="line">cpp-foundations/</div>
+<div class="line">├── student/</div>
+<div class="line">│   ├── include/</div>
+<div class="line">│   └── src/</div>
+<div class="line">├── docs/</div>
+<div class="line">│   ├── topics/</div>
+<div class="line">│   └── mainpage.dox</div>
+<div class="line">├── CMakeLists.txt</div>
+<div class="line">└── README.md</div>
+</div><!-- fragment --><p>Significado de las carpetas:</p>
+<ul>
+<li><code>student/</code>: Código del alumno. ÚNICO lugar donde se debe programar.</li>
+<li><code>docs/</code>: Documentación del curso generada con Doxygen.</li>
+<li><code>CMakeLists.txt</code>: Sistema de compilación del proyecto.</li>
+<li><code><a class="el" href="README_8md.html">README.md</a></code>: Información general del repositorio para GitHub (no es la Main Page).</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="mainpage_workflow"></a>
+Flujo de trabajo esperado</h1>
+<p>El flujo de trabajo estándar del curso es:</p>
+<ol type="1">
+<li>Leer la lección correspondiente</li>
+<li>Implementar código en <code>student/</code></li>
+<li>Compilar y probar localmente</li>
+<li>Crear commits pequeños y claros</li>
+<li>Subir cambios a GitHub</li>
+<li>Verificar que el CI pase correctamente</li>
+</ol>
+<p>No seguir este flujo suele resultar en errores, reprocesos o fallas de evaluación.</p>
+<hr  />
+<h1><a class="anchor" id="mainpage_local_build"></a>
+Compilación y pruebas locales</h1>
+<p>El proyecto se compila usando CMake.</p>
+<p>Flujo mínimo recomendado:</p>
+<div class="fragment"><div class="line">mkdir -p build</div>
+<div class="line">cmake -S . -B build</div>
+<div class="line">cmake --build build</div>
+<div class="line">ctest --test-dir build --output-on-failure</div>
+</div><!-- fragment --><p>El estudiante debe ser capaz de ejecutar estos comandos sin errores antes de avanzar en el curso.</p>
+<hr  />
+<h1><a class="anchor" id="mainpage_expectations"></a>
+Expectativas del curso</h1>
+<p>Se espera que el estudiante:</p>
+<ul>
+<li>Lea y entienda las lecciones antes de programar</li>
+<li>No copie código sin comprenderlo</li>
+<li>Use Git de forma consciente</li>
+<li>Aprenda a interpretar errores de compilación</li>
+<li>Priorice claridad y corrección sobre rapidez</li>
+</ul>
+<p>Este curso evalúa <b>fundamentos, no atajos</b>.</p>
+<hr  />
+<h1><a class="anchor" id="mainpage_final"></a>
+Nota final</h1>
+<p>C++ es un lenguaje poderoso, pero exige disciplina.</p>
+<p>Este curso está diseñado para construir bases sólidas que permitan escalar a proyectos reales de ingeniería.</p>
+<p>Comienza con la <a class="el" href="group__cpp__lesson__00.html">Lesson 00</a> antes de escribir una sola línea de código. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
