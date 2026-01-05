@@ -18,7 +18,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Guard: only student/ changes allowed
+      - name: "Guard: only student/ changes allowed"
         shell: bash
         env:
           EVENT_NAME: ${{ github.event_name }}
