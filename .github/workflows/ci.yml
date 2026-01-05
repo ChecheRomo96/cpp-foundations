@@ -87,8 +87,23 @@ jobs:
 
       - name: Capture coverage
         run: |
-          lcov --directory build --capture --output-file coverage.info
-          lcov --remove coverage.info '/usr/*' '*/_deps/*' '*/tests/*' --output-file coverage.filtered.info
+          # Capture (ignore known geninfo mismatches from gtest / gcc / lcov)
+          lcov --directory build \
+               --capture \
+               --output-file coverage.info \
+               --ignore-errors mismatch \
+               --rc geninfo_unexecuted_blocks=1
+
+          # Remove noise
+          lcov --remove coverage.info \
+            '/usr/*' \
+            '*/_deps/*' \
+            '*/tests/*' \
+            --output-file coverage.filtered.info \
+            --ignore-errors mismatch \
+            --rc geninfo_unexecuted_blocks=1
+
+          # Summary + HTML
           lcov --summary coverage.filtered.info
           genhtml coverage.filtered.info --output-directory coverage_html
 
