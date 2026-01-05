@@ -6,11 +6,13 @@ on:
   pull_request:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build_test_publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
@@ -184,7 +186,7 @@ jobs:
             echo "No coverage data (coverage.info has no SF: entries). Creating placeholder page."
             mkdir -p site/coverage
             cat > site/coverage/index.html <<'EOF'
-            
+
           <!doctype html>
           <html><body>
           <h1>Coverage report</h1>
