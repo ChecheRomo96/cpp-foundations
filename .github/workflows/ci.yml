@@ -1,0 +1,87 @@
+name: CI + Coverage
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  guard_test_coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Guard: only student/ changes allowed
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+            HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+          else
+            BASE_SHA="${{ github.event.before }}"
+            HEAD_SHA="${{ github.sha }}"
+          fi
+
+          echo "BASE_SHA=$BASE_SHA"
+          echo "HEAD_SHA=$HEAD_SHA"
+
+          if [ "$BASE_SHA" = "0000000000000000000000000000000000000000" ]; then
+            echo "Initial push detected; skipping guard."
+            exit 0
+          fi
+
+          CHANGED_FILES=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" || true)
+
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "No changed files."
+            exit 0
+          fi
+
+          echo "Changed files:"
+          echo "$CHANGED_FILES"
+
+          VIOLATIONS=$(echo "$CHANGED_FILES" | grep -vE '^student/' || true)
+
+          if [ -n "$VIOLATIONS" ]; then
+            echo ""
+            echo "ERROR: Only changes under student/ are allowed."
+            echo "The following files violate the policy:"
+            echo "$VIOLATIONS"
+            exit 1
+          fi
+
+          echo "Guard OK: all changes are under student/."
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake g++ lcov
+
+      - name: Configure (coverage)
+        run: cmake -S . -B build -DENABLE_TESTING=ON -DENABLE_COVERAGE=ON -DCMAKE_BUILD_TYPE=Debug
+
+      - name: Build
+        run: cmake --build build
+
+      - name: Run tests
+        run: |
+          cd build
+          ctest --output-on-failure
+
+      - name: Capture coverage
+        run: |
+          lcov --directory build --capture --output-file coverage.info
+          lcov --remove coverage.info '/usr/*' '*/_deps/*' '*/tests/*' --output-file coverage.filtered.info
+          lcov --summary coverage.filtered.info
+          genhtml coverage.filtered.info --output-directory coverage_html
+
+      - name: Upload coverage HTML artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage_html
+          path: coverage_html
