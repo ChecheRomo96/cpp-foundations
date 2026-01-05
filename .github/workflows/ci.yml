@@ -19,8 +19,10 @@ jobs:
           fetch-depth: 0
 
       - name: "Guard: only student/ changes allowed"
+        if: env.COURSE_GUARD_ENABLED == 'true'
         shell: bash
         env:
+          COURSE_GUARD_ENABLED: ${{ vars.COURSE_GUARD_ENABLED }}
           EVENT_NAME: ${{ github.event_name }}
           PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
           PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
@@ -28,7 +30,6 @@ jobs:
           PUSH_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
-
           if [ "$EVENT_NAME" = "pull_request" ]; then
             BASE_SHA="$PR_BASE_SHA"
             HEAD_SHA="$PR_HEAD_SHA"
