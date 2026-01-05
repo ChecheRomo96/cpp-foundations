@@ -2,29 +2,39 @@ name: CI + Coverage
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
+
+permissions:
+  contents: read
 
 jobs:
   guard_test_coverage:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Guard: only student/ changes allowed
         shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PUSH_BEFORE_SHA: ${{ github.event.before }}
+          PUSH_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
 
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            BASE_SHA="${{ github.event.pull_request.base.sha }}"
-            HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            BASE_SHA="$PR_BASE_SHA"
+            HEAD_SHA="$PR_HEAD_SHA"
           else
-            BASE_SHA="${{ github.event.before }}"
-            HEAD_SHA="${{ github.sha }}"
+            BASE_SHA="$PUSH_BEFORE_SHA"
+            HEAD_SHA="$PUSH_SHA"
           fi
 
           echo "BASE_SHA=$BASE_SHA"
@@ -35,7 +45,7 @@ jobs:
             exit 0
           fi
 
-          CHANGED_FILES=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" || true)
+          CHANGED_FILES="$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" || true)"
 
           if [ -z "$CHANGED_FILES" ]; then
             echo "No changed files."
@@ -45,7 +55,8 @@ jobs:
           echo "Changed files:"
           echo "$CHANGED_FILES"
 
-          VIOLATIONS=$(echo "$CHANGED_FILES" | grep -vE '^student/' || true)
+          # Fail if any changed file is outside student/
+          VIOLATIONS="$(echo "$CHANGED_FILES" | grep -vE '^student/' || true)"
 
           if [ -n "$VIOLATIONS" ]; then
             echo ""
