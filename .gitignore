@@ -26,3 +26,6 @@ coverage_html/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Doxygen output
+docs_out/
