@@ -70,22 +70,27 @@ jobs:
           sudo apt-get install -y cmake g++ lcov doxygen graphviz python3
 
       # --------------------------------------------------
-      # Build + Tests
+      # Build + Tests (FORCE COVERAGE FLAGS HERE)
       # --------------------------------------------------
       - name: Configure (coverage)
         run: cmake -S . -B build \
           -DENABLE_TESTING=ON \
           -DENABLE_COVERAGE=ON \
-          -DCMAKE_BUILD_TYPE=Debug
+          -DCMAKE_BUILD_TYPE=Debug \
+          -DCMAKE_CXX_FLAGS="--coverage -O0 -g" \
+          -DCMAKE_EXE_LINKER_FLAGS="--coverage" \
+          -DCMAKE_SHARED_LINKER_FLAGS="--coverage"
 
       - name: Build
         run: cmake --build build
 
-      - name: Run tests (ctest)
+      # Run the instrumented binary to generate .gcda
+      - name: Run UnitTests (generate gcda)
         run: |
           cd build
-          ctest --output-on-failure
+          ./UnitTests --gtest_brief=1
 
+      # Export gtest XML for unit test HTML report
       - name: Export gtest xml
         run: |
           cd build
@@ -96,9 +101,8 @@ jobs:
       # --------------------------------------------------
       - name: Prepare site folders
         run: |
-          rm -rf site grading
+          rm -rf site
           mkdir -p site/unit_tests site/coverage site/doxygen
-          mkdir -p grading/unit_tests grading/coverage grading/doxygen
 
       # --------------------------------------------------
       # Unit test HTML report
@@ -149,6 +153,13 @@ jobs:
       # --------------------------------------------------
       # Coverage
       # --------------------------------------------------
+      - name: Debug: show compile flags
+        run: |
+          echo "UnitTests flags.make:"
+          sed -n '1,160p' build/CMakeFiles/UnitTests.dir/flags.make || true
+          echo "FoundationsLib flags.make:"
+          sed -n '1,160p' build/CMakeFiles/FoundationsLib.dir/flags.make || true
+
       - name: Debug coverage files (gcno/gcda)
         run: |
           echo "GCNO:"
@@ -161,7 +172,7 @@ jobs:
           lcov --directory build \
                --capture \
                --output-file coverage.info \
-               --ignore-errors mismatch \
+               --ignore-errors mismatch,empty \
                --rc geninfo_unexecuted_blocks=1
 
           lcov --remove coverage.info \
@@ -169,7 +180,7 @@ jobs:
             '*/_deps/*' \
             '*/tests/*' \
             --output-file coverage.filtered.info \
-            --ignore-errors mismatch \
+            --ignore-errors mismatch,empty \
             --rc geninfo_unexecuted_blocks=1
 
           genhtml coverage.filtered.info --output-directory site/coverage
@@ -183,45 +194,45 @@ jobs:
           cp -R docs_out/html/* site/doxygen/
 
       # --------------------------------------------------
-      # Landing page (IMPORTANT: EOF must start at column 1)
+      # Landing page (no heredoc/EOF)
       # --------------------------------------------------
       - name: Create index page
         shell: bash
         run: |
-          cat > site/index.html <<'EOF'
-          <!doctype html>
-          <html>
-          <head><meta charset="utf-8"><title>cpp-foundations Reports</title></head>
-          <body>
-            <h1>cpp-foundations – Evaluation Reports</h1>
-            <ul>
-              <li><a href="unit_tests/">Unit Tests</a></li>
-              <li><a href="coverage/">Coverage</a></li>
-              <li><a href="doxygen/">Doxygen</a></li>
-            </ul>
-          </body>
-          </html>
-          EOF
+          printf '%s\n' \
+'<!doctype html>' \
+'<html>' \
+'<head><meta charset="utf-8"><title>cpp-foundations Reports</title></head>' \
+'<body>' \
+'  <h1>cpp-foundations – Evaluation Reports</h1>' \
+'  <ul>' \
+'    <li><a href="unit_tests/">Unit Tests</a></li>' \
+'    <li><a href="coverage/">Coverage</a></li>' \
+'    <li><a href="doxygen/">Doxygen</a></li>' \
+'  </ul>' \
+'</body>' \
+'</html>' \
+          > site/index.html
 
       # --------------------------------------------------
       # Debug Pages: confirm what will be published
       # --------------------------------------------------
-      - name: Debug Pages context
+      - name: Debug Pages: context
         run: |
           echo "REF: $GITHUB_REF"
           echo "EVENT: $GITHUB_EVENT_NAME"
 
-      - name: Debug Pages list site tree
+      - name: Debug Pages: list site tree
         run: |
           echo "===== site/ files (maxdepth 3) ====="
           find site -maxdepth 3 -type f | sort || true
 
-      - name: Debug Pages disk usage
+      - name: Debug Pages: disk usage
         run: |
           echo "===== site/ sizes ====="
           du -h site || true
 
-      - name: Debug Pages preview index.html
+      - name: Debug Pages: preview index.html
         run: |
           echo "===== site/index.html ====="
           sed -n '1,200p' site/index.html || echo "index.html missing"
