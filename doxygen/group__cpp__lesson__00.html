@@ -91,13 +91,13 @@ Collaboration diagram for Lesson 00:</div>
 <h1><a class="anchor" id="lesson00_objectives"></a>
 Objetivos</h1>
 <p>Al finalizar esta lección, el estudiante será capaz de:</p><ul>
-<li>Instalar y verificar las herramientas necesarias para el curso</li>
-<li>Clonar el repositorio y entender la estructura mínima</li>
-<li>Configurar un flujo local con CMake (build fuera del árbol)</li>
-<li>Compilar el proyecto en modo Debug/Release</li>
-<li>Ejecutar pruebas localmente usando CTest</li>
-<li>Realizar su commit inicial correctamente</li>
-<li>Entender las reglas de protección del repositorio</li>
+<li>Crear su repositorio personal usando un template de GitHub</li>
+<li>Clonar y preparar el proyecto localmente</li>
+<li>Instalar y verificar las herramientas necesarias</li>
+<li>Compilar el proyecto usando CMake</li>
+<li>Ejecutar pruebas localmente con CTest</li>
+<li>Entender las reglas de protección del curso</li>
+<li>Realizar su commit inicial de forma correcta</li>
 </ul>
 <hr  />
 <h1><a class="anchor" id="lesson00_prereq"></a>
@@ -109,7 +109,7 @@ Requisitos mínimos</h1>
 <li>CMake</li>
 </ul>
 <p>Recomendado:</p><ul>
-<li>Un editor como VS Code, CLion o similar</li>
+<li>Un editor de código (VS Code, CLion, etc.)</li>
 <li>Un depurador (gdb o lldb)</li>
 </ul>
 <hr  />
@@ -118,7 +118,7 @@ Sistemas operativos soportados</h1>
 <p>El curso funciona en:</p><ul>
 <li>Linux (recomendado)</li>
 <li>macOS</li>
-<li>Windows usando WSL (recomendado sobre MSVC para este curso)</li>
+<li>Windows usando WSL2</li>
 </ul>
 <hr  />
 <h1><a class="anchor" id="lesson00_install"></a>
@@ -143,30 +143,39 @@ Verificación de instalación</h1>
 <div class="fragment"><div class="line">g++ --version</div>
 <div class="line">git --version</div>
 <div class="line">cmake --version</div>
-</div><!-- fragment --><hr  />
-<h1><a class="anchor" id="lesson00_repo"></a>
-Clonar y preparar el repositorio</h1>
-<div class="fragment"><div class="line">git clone https:<span class="comment">//github.com/ChecheRomo96/cpp-foundations.git</span></div>
+</div><!-- fragment --><p>Si alguno de estos comandos falla, el entorno no está listo.</p>
+<hr  />
+<h1><a class="anchor" id="lesson00_repo_template"></a>
+Uso del repositorio como template</h1>
+<p>El repositorio cpp-foundations <b>se utiliza como template</b>.</p>
+<p>Este paso se realiza <b>una sola vez</b>, directamente en GitHub.</p>
+<p>Pasos:</p><ol type="1">
+<li>Ir al repositorio base: <a href="https://github.com/ChecheRomo96/cpp-foundations">https://github.com/ChecheRomo96/cpp-foundations</a></li>
+<li>Hacer clic en <b>Use this template</b></li>
+<li>Crear el repositorio personal del curso</li>
+</ol>
+<p>El repositorio resultante es <b>independiente</b> y pertenece al estudiante.</p>
+<hr  />
+<h2><a class="anchor" id="lesson00_repo_clone"></a>
+Clonado del repositorio del estudiante</h2>
+<p>Una vez creado el repositorio a partir del template, se clona localmente:</p>
+<div class="fragment"><div class="line">git clone https:<span class="comment">//github.com/&lt;tu-usuario&gt;/cpp-foundations.git</span></div>
 <div class="line">cd cpp-foundations</div>
 <div class="line">git status</div>
-</div><!-- fragment --><hr  />
+</div><!-- fragment --><p>A partir de este punto, todo el trabajo se realiza sobre este repositorio.</p>
+<hr  />
 <h1><a class="anchor" id="lesson00_course_guard"></a>
 Protección del curso (COURSE_GUARD_ENABLED)</h1>
-<p>Este repositorio incluye un mecanismo de protección del curso.</p>
+<p>El repositorio incluye un mecanismo de protección del curso.</p>
 <p>La variable:</p>
 <div class="fragment"><div class="line">COURSE_GUARD_ENABLED = <span class="keyword">true</span></div>
 </div><!-- fragment --><p>indica que el repositorio está operando en <b>modo curso</b>.</p>
-<p>Cuando esta variable está habilitada:</p><ul>
-<li>El CI valida que <b>solo se modifique la carpeta <code>student/</code></b></li>
+<p>Cuando está habilitada:</p><ul>
+<li>El CI valida que solo se modifique la carpeta <code>student/</code></li>
 <li>Cambios fuera de <code>student/</code> provocan falla automática</li>
-<li>El flujo de trabajo del curso se hace cumplir estrictamente</li>
+<li>La estructura del curso queda protegida</li>
 </ul>
-<p>Esta variable <b>NO debe ser modificada por el estudiante</b>.</p>
-<p>Su propósito es:</p><ul>
-<li>Proteger la estructura del curso</li>
-<li>Evitar modificaciones accidentales</li>
-<li>Garantizar evaluaciones justas y consistentes</li>
-</ul>
+<p>Esta variable <b>no debe ser modificada por el estudiante</b>.</p>
 <hr  />
 <h1><a class="anchor" id="lesson00_structure"></a>
 Estructura mínima del repositorio</h1>
@@ -180,43 +189,44 @@ Estructura mínima del repositorio</h1>
 <div class="line">├── .gitignore</div>
 <div class="line">└── README.md</div>
 </div><!-- fragment --><p>Regla del curso:</p><ul>
-<li>El estudiante <b>solo modifica <code>student/</code></b></li>
+<li>El estudiante solo modifica <code>student/</code></li>
 </ul>
 <hr  />
 <h1><a class="anchor" id="lesson00_gitignore"></a>
 Regla de archivos ignorados (.gitignore)</h1>
 <p>Los archivos generados por la compilación <b>no deben versionarse</b>.</p>
-<p>En particular, la carpeta:</p>
+<p>En particular:</p>
 <div class="fragment"><div class="line">build/</div>
-</div><!-- fragment --><p>debe estar listada en <code>.gitignore</code>.</p>
-<p>Ejemplo mínimo de <code>.gitignore</code> usado en este curso:</p>
+</div><!-- fragment --><p>debe estar listado en <code>.gitignore</code>.</p>
+<p>Ejemplo mínimo:</p>
 <div class="fragment"><div class="line">build/</div>
 <div class="line">build-*/</div>
 <div class="line">*.o</div>
-<div class="line">*.exe</div>
 <div class="line">*.out</div>
+<div class="line">*.exe</div>
 <div class="line">CMakeCache.txt</div>
 <div class="line">CMakeFiles/</div>
-</div><!-- fragment --><p>Subir archivos de <code>build/</code> invalida el commit.</p>
+</div><!-- fragment --><p>Subir archivos de build invalida el commit.</p>
 <hr  />
 <h1><a class="anchor" id="lesson00_build"></a>
-Flujo de compilación local con CMake</h1>
+Compilación local con CMake</h1>
+<p>Flujo recomendado (build fuera del árbol):</p>
 <div class="fragment"><div class="line">mkdir -p build</div>
 <div class="line">cmake -S . -B build</div>
 <div class="line">cmake --build build</div>
 </div><!-- fragment --><hr  />
 <h1><a class="anchor" id="lesson00_tests"></a>
-Ejecutar pruebas localmente</h1>
+Ejecución de pruebas locales</h1>
 <div class="fragment"><div class="line">ctest --test-dir build --output-on-failure</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="lesson00_git_workflow"></a>
+<h1><a class="anchor" id="lesson00_git_commit"></a>
 Commit inicial obligatorio</h1>
-<p>Una vez que el proyecto:</p><ul>
+<p>Una vez verificado que el proyecto:</p><ul>
 <li>Compila correctamente</li>
 <li>Ejecuta pruebas sin errores</li>
 </ul>
 <p>el estudiante <b>debe realizar su commit inicial</b>.</p>
-<h2><a class="anchor" id="lesson00_git_initial_commit"></a>
+<h2><a class="anchor" id="lesson00_git_commit_steps"></a>
 Pasos del commit inicial</h2>
 <div class="fragment"><div class="line">git status</div>
 <div class="line">git add student/</div>
@@ -231,7 +241,7 @@ Pasos del commit inicial</h2>
 <h1><a class="anchor" id="lesson00_checklist"></a>
 Checklist final</h1>
 <p>Antes de pasar a Lesson 01, el estudiante debe poder ejecutar:</p>
-<div class="fragment"><div class="line">git clone https:<span class="comment">//github.com/ChecheRomo96/cpp-foundations.git</span></div>
+<div class="fragment"><div class="line">git clone https:<span class="comment">//github.com/&lt;tu-usuario&gt;/cpp-foundations.git</span></div>
 <div class="line">cd cpp-foundations</div>
 <div class="line">cmake -S . -B build</div>
 <div class="line">cmake --build build</div>
