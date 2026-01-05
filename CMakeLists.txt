@@ -1,66 +1,238 @@
-cmake_minimum_required(VERSION 3.16)
-project(CppFoundations LANGUAGES CXX)
+name: CI + Publish Reports
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+on:
+  push:
+    branches: ["main"]
+  pull_request:
 
-option(ENABLE_TESTING "Enable unit tests" ON)
-option(ENABLE_COVERAGE "Enable coverage flags" OFF)
+permissions:
+  contents: read
 
-# ------------------------------------------------------------
-# Coverage: apply flags PER TARGET (more reliable than globals)
-# ------------------------------------------------------------
-function(enable_coverage_for_target tgt)
-  if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-    target_compile_options(${tgt} PRIVATE -O0 -g --coverage)
-    target_link_options(${tgt} PRIVATE --coverage)
-  else()
-    message(WARNING "Coverage requested but compiler is not GNU/Clang")
-  endif()
-endfunction()
+jobs:
+  build_test_publish:
+    runs-on: ubuntu-latest
 
-add_library(FoundationsLib
-  student/src/MathUtils.cpp
-)
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-target_include_directories(FoundationsLib PUBLIC
-  ${CMAKE_CURRENT_SOURCE_DIR}/student/include
-)
+      # --------------------------------------------------
+      # Guard: alumnos solo pueden modificar student/
+      # --------------------------------------------------
+      - name: "Guard: only student/ changes allowed"
+        if: vars.COURSE_GUARD_ENABLED == 'true'
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PUSH_BEFORE_SHA: ${{ github.event.before }}
+          PUSH_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
 
-if(ENABLE_COVERAGE)
-  message(STATUS "Coverage enabled")
-  enable_coverage_for_target(FoundationsLib)
-endif()
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            BASE_SHA="$PR_BASE_SHA"
+            HEAD_SHA="$PR_HEAD_SHA"
+          else
+            BASE_SHA="$PUSH_BEFORE_SHA"
+            HEAD_SHA="$PUSH_SHA"
+          fi
 
-if(ENABLE_TESTING)
-  include(CTest)
-  enable_testing()
+          if [ "$BASE_SHA" = "0000000000000000000000000000000000000000" ]; then
+            echo "Initial push detected; skipping guard."
+            exit 0
+          fi
 
-  include(FetchContent)
-  FetchContent_Declare(
-    googletest
-    URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
-  )
-  set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-  FetchContent_MakeAvailable(googletest)
+          CHANGED_FILES="$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" || true)"
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "No changed files."
+            exit 0
+          fi
 
-  add_executable(UnitTests
-    tests/test_math_utils.cpp
-  )
+          VIOLATIONS="$(echo "$CHANGED_FILES" | grep -vE '^student/' || true)"
+          if [ -n "$VIOLATIONS" ]; then
+            echo "ERROR: Only changes under student/ are allowed."
+            echo "$VIOLATIONS"
+            exit 1
+          fi
 
-  target_include_directories(UnitTests PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/student/include
-  )
+          echo "Guard OK."
 
-  target_link_libraries(UnitTests PRIVATE
-    FoundationsLib
-    GTest::gtest_main
-  )
+      # --------------------------------------------------
+      # Tooling
+      # --------------------------------------------------
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            cmake g++ lcov doxygen graphviz python3
 
-  if(ENABLE_COVERAGE)
-    enable_coverage_for_target(UnitTests)
-  endif()
+      # --------------------------------------------------
+      # Build + Tests
+      # --------------------------------------------------
+      - name: Configure (coverage)
+        run: cmake -S . -B build \
+          -DENABLE_TESTING=ON \
+          -DENABLE_COVERAGE=ON \
+          -DCMAKE_BUILD_TYPE=Debug
 
-  include(GoogleTest)
-  gtest_discover_tests(UnitTests)
-endif()
+      - name: Build
+        run: cmake --build build
+
+      - name: Run tests (ctest)
+        run: |
+          cd build
+          ctest --output-on-failure
+
+      - name: Export gtest xml
+        run: |
+          cd build
+          ./UnitTests --gtest_output=xml:../gtest.xml
+
+      # --------------------------------------------------
+      # Prepare site structure
+      # --------------------------------------------------
+      - name: Prepare site folders
+        run: |
+          rm -rf site grading
+          mkdir -p site/unit_tests site/coverage site/doxygen
+          mkdir -p grading/unit_tests grading/coverage grading/doxygen
+
+      # --------------------------------------------------
+      # Unit test HTML report
+      # --------------------------------------------------
+      - name: Generate unit test report
+        run: |
+          python3 - <<'PY'
+          import xml.etree.ElementTree as ET
+          from pathlib import Path
+
+          root = ET.parse("gtest.xml").getroot()
+          tests = []
+
+          for suite in root.findall("testsuite"):
+              sname = suite.get("name", "")
+              for tc in suite.findall("testcase"):
+                  tname = tc.get("name", "")
+                  full = f"{sname}.{tname}"
+                  failed = tc.find("failure") is not None
+                  tests.append((full, not failed))
+
+          total = len(tests)
+          passed = sum(1 for _, ok in tests if ok)
+          pct = (100.0 * passed / total) if total else 0.0
+
+          rows = "\n".join(
+              f"<tr><td><code>{name}</code></td><td>{'PASS' if ok else 'FAIL'}</td></tr>"
+              for name, ok in tests
+          )
+
+          html = f"""<!doctype html>
+          <html>
+          <head><meta charset="utf-8"><title>Unit Tests</title></head>
+          <body>
+            <h1>Unit Tests</h1>
+            <p><b>Result:</b> {passed}/{total} passed ({pct:.1f}%)</p>
+            <table border="1" cellpadding="6">
+              <tr><th>Test</th><th>Status</th></tr>
+              {rows}
+            </table>
+          </body>
+          </html>
+          """
+
+          Path("site/unit_tests/index.html").write_text(html, encoding="utf-8")
+          PY
+
+      # --------------------------------------------------
+      # Coverage
+      # --------------------------------------------------
+      - name: Debug coverage files (gcno/gcda)
+        run: |
+          echo "GCNO:"
+          find build -name "*.gcno" | head -n 50 || true
+          echo "GCDA:"
+          find build -name "*.gcda" | head -n 50 || true
+
+      - name: Generate coverage report
+        run: |
+          lcov --directory build \
+               --capture \
+               --output-file coverage.info \
+               --ignore-errors mismatch \
+               --rc geninfo_unexecuted_blocks=1
+
+          lcov --remove coverage.info \
+            '/usr/*' \
+            '*/_deps/*' \
+            '*/tests/*' \
+            --output-file coverage.filtered.info \
+            --ignore-errors mismatch \
+            --rc geninfo_unexecuted_blocks=1
+
+          genhtml coverage.filtered.info --output-directory site/coverage
+
+      # --------------------------------------------------
+      # Doxygen
+      # --------------------------------------------------
+      - name: Generate Doxygen docs
+        run: |
+          doxygen docs/Doxyfile
+          cp -R docs_out/html/* site/doxygen/
+
+      # --------------------------------------------------
+      # Landing page
+      # --------------------------------------------------
+      - name: Create index page
+        run: |
+          cat > site/index.html <<'EOF'
+          <!doctype html>
+          <html>
+          <head><meta charset="utf-8"><title>cpp-foundations Reports</title></head>
+          <body>
+            <h1>cpp-foundations – Evaluation Reports</h1>
+            <ul>
+              <li><a href="unit_tests/">Unit Tests</a></li>
+              <li><a href="coverage/">Coverage</a></li>
+              <li><a href="doxygen/">Doxygen</a></li>
+            </ul>
+          </body>
+          </html>
+          EOF
+
+      # --------------------------------------------------
+      # Debug Pages: confirm what will be published
+      # --------------------------------------------------
+      - name: Debug Pages: context
+        run: |
+          echo "REF: $GITHUB_REF"
+          echo "EVENT: $GITHUB_EVENT_NAME"
+
+      - name: Debug Pages: list site tree
+        run: |
+          echo "===== site/ files (maxdepth 3) ====="
+          find site -maxdepth 3 -type f | sort || true
+
+      - name: Debug Pages: disk usage
+        run: |
+          echo "===== site/ sizes ====="
+          du -h site || true
+
+      - name: Debug Pages: preview index.html
+        run: |
+          echo "===== site/index.html ====="
+          sed -n '1,200p' site/index.html || echo "index.html missing"
+
+      # --------------------------------------------------
+      # Publish to GitHub Pages
+      # --------------------------------------------------
+      - name: Publish to GitHub Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: site
+          publish_branch: gh-pages
