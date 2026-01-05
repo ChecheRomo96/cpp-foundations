@@ -186,10 +186,10 @@ jobs:
       # Landing page (IMPORTANT: EOF must start at column 1)
       # --------------------------------------------------
       - name: Create index page
-        shell: bash
         run: |
-          cat > site/index.html <<'EOF'
-          <!doctype html>
+          python3 - <<'PY'
+          from pathlib import Path
+          Path("site/index.html").write_text("""<!doctype html>
           <html>
           <head><meta charset="utf-8"><title>cpp-foundations Reports</title></head>
           <body>
@@ -201,8 +201,9 @@ jobs:
             </ul>
           </body>
           </html>
-          EOF
-
+          """, encoding="utf-8")
+          PY
+          
       # --------------------------------------------------
       # Debug Pages: confirm what will be published
       # --------------------------------------------------
