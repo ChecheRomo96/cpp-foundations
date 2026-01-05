@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>cpp-foundations: Lesson 00 – Introducción al repositorio y flujo de trabajo</title>
+<title>cpp-foundations: Lesson 00</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -46,6 +46,7 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -67,13 +68,26 @@ $(function() {
 </div>
 </div>
 
-</div><!-- top -->
-<div><div class="header">
-  <div class="headertitle"><div class="title">Lesson 00 – Introducción al repositorio y flujo de trabajo</div></div>
+<div class="header">
+  <div class="headertitle"><div class="title">Lesson 00<div class="ingroups"><a class="el" href="group__cpp__course.html">C++ Foundations – Course</a></div></div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Introducción al repositorio cpp-foundations, su estructura y el flujo de trabajo esperado para el curso.</p>
-<h1><a class="anchor" id="lesson00_objectives"></a>
+
+<p>Introducción al repositorio y flujo de trabajo.  
+</p>
+<div class="dynheader">
+Collaboration diagram for Lesson 00:</div>
+<div class="dyncontent">
+<div class="center"><img src="group__cpp__lesson__00.png" border="0" usemap="#agroup____cpp____lesson____00" alt=""/></div>
+<map name="agroup____cpp____lesson____00" id="agroup____cpp____lesson____00">
+<area shape="rect" href="group__cpp__course.html" title="Curso completo: lecciones, estructura y navegación." alt="" coords="5,5,152,45"/>
+<area shape="rect" title="Introducción al repositorio y flujo de trabajo." alt="" coords="200,13,287,38"/>
+</map>
+</div>
+<p>Introducción al repositorio y flujo de trabajo. </p>
+
+
+<h3><a id="cpp_lesson_00_page" name="cpp_lesson_00_page"></a>Lesson 00 – Introducción al repositorio y flujo de trabajo</h3><div class="textblock"><h1><a class="anchor" id="lesson00_objectives"></a>
 Objetivos</h1>
 <p>Al finalizar esta lección, el estudiante será capaz de:</p><ul>
 <li>Comprender el propósito del repositorio cpp-foundations</li>
@@ -85,8 +99,7 @@ Objetivos</h1>
 <hr  />
 <h1><a class="anchor" id="lesson00_repo_about"></a>
 ¿Qué es cpp-foundations?</h1>
-<p>cpp-foundations es un repositorio educativo diseñado para:</p>
-<ul>
+<p>cpp-foundations es un repositorio educativo diseñado para:</p><ul>
 <li>Enseñar C++ desde fundamentos reales</li>
 <li>Promover buenas prácticas desde el inicio</li>
 <li>Simular un entorno de trabajo profesional</li>
@@ -96,7 +109,6 @@ Objetivos</h1>
 <hr  />
 <h1><a class="anchor" id="lesson00_repo_structure"></a>
 Estructura del repositorio</h1>
-<p>La estructura general del repositorio es la siguiente:</p>
 <div class="fragment"><div class="line">cpp-foundations/</div>
 <div class="line">├── student/</div>
 <div class="line">│   ├── include/</div>
@@ -110,27 +122,16 @@ Estructura del repositorio</h1>
 Carpeta student/</h2>
 <p>Esta es la ÚNICA carpeta que el estudiante debe modificar.</p>
 <div class="fragment"><div class="line">student/</div>
-<div class="line">├── include/   <span class="comment">// Headers creados por el alumno</span></div>
-<div class="line">└── src/       <span class="comment">// Código fuente del alumno</span></div>
+<div class="line">├── include/</div>
+<div class="line">└── src/</div>
 </div><!-- fragment --><p>Reglas importantes:</p><ul>
 <li>Todo el código del alumno vive aquí</li>
 <li>No modificar archivos fuera de student/</li>
 <li>El CI del repositorio valida esta regla</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="lesson00_docs_folder"></a>
-Carpeta docs/</h2>
-<p>Contiene la documentación del curso.</p>
-<div class="fragment"><div class="line">docs/</div>
-<div class="line">└── topics/</div>
-<div class="line">    ├── Lesson00.dox</div>
-<div class="line">    ├── Lesson01.dox</div>
-<div class="line">    └── ...</div>
-</div><!-- fragment --><p>Estas lecciones se generan automáticamente usando Doxygen.</p>
-<hr  />
 <h1><a class="anchor" id="lesson00_workflow"></a>
 Flujo de trabajo esperado</h1>
-<p>El flujo de trabajo básico es:</p>
 <ol type="1">
 <li>Clonar el repositorio</li>
 <li>Crear o modificar archivos SOLO en student/</li>
@@ -141,71 +142,25 @@ Flujo de trabajo esperado</h1>
 <hr  />
 <h1><a class="anchor" id="lesson00_git_basic"></a>
 Git básico (mínimo indispensable)</h1>
-<p>Clonar el repositorio:</p>
 <div class="fragment"><div class="line">git clone &lt;url-del-repositorio&gt;</div>
-</div><!-- fragment --><p>Ver el estado del repositorio:</p>
-<div class="fragment"><div class="line">git status</div>
-</div><!-- fragment --><p>Agregar cambios:</p>
-<div class="fragment"><div class="line">git add student/</div>
-</div><!-- fragment --><p>Crear un commit:</p>
-<div class="fragment"><div class="line">git commit -m <span class="stringliteral">&quot;Lesson 01: variables and scope&quot;</span></div>
-</div><!-- fragment --><p>Subir cambios:</p>
-<div class="fragment"><div class="line">git push</div>
+<div class="line">git status</div>
+<div class="line">git add student/</div>
+<div class="line">git commit -m <span class="stringliteral">&quot;Lesson 00: repo workflow&quot;</span></div>
+<div class="line">git push</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="lesson00_commit_rules"></a>
-Reglas de commits</h1>
-<p>Buenas prácticas:</p><ul>
-<li>Commits pequeños</li>
-<li>Mensajes claros</li>
-<li>Un commit por avance lógico</li>
-</ul>
-<p>Ejemplos correctos:</p><ul>
-<li>"Lesson 00: project setup"</li>
-<li>"Lesson 01: data types examples"</li>
-</ul>
-<p>Ejemplos incorrectos:</p><ul>
-<li>"changes"</li>
-<li>"final"</li>
-<li>"fix"</li>
-</ul>
-<hr  />
 <h1><a class="anchor" id="lesson00_ci"></a>
 Continuous Integration (CI)</h1>
-<p>El repositorio utiliza GitHub Actions para:</p>
-<ul>
-<li>Verificar que solo se modifique student/</li>
-<li>Compilar el código</li>
-<li>Generar reportes</li>
+<p>El repositorio utiliza GitHub Actions para verificar:</p><ul>
+<li>Que solo se modifique student/</li>
+<li>Que el proyecto compile</li>
+<li>Que los reportes se generen correctamente</li>
 </ul>
-<p>Si el CI falla:</p><ul>
-<li>El código NO se considera válido</li>
-<li>El cambio debe corregirse</li>
-</ul>
-<p>Aprender a leer errores del CI es parte del curso.</p>
-<hr  />
-<h1><a class="anchor" id="lesson00_expectations"></a>
-Expectativas del curso</h1>
-<p>Se espera que el estudiante:</p><ul>
-<li>Lea las lecciones antes de programar</li>
-<li>Entienda el código que escribe</li>
-<li>No copie código sin comprenderlo</li>
-<li>Use el repositorio como herramienta de aprendizaje</li>
-</ul>
-<p>Este curso prioriza:</p><ul>
-<li>Claridad sobre velocidad</li>
-<li>Fundamentos sobre trucos</li>
-<li>Código correcto sobre código rápido</li>
-</ul>
-<hr  />
-<h1><a class="anchor" id="lesson00_keyidea"></a>
-Idea clave</h1>
-<p>El repositorio es parte del curso. Aprender a trabajar con estructura, control de versiones y reglas es tan importante como aprender C++.</p>
+<p>Si el CI falla, el cambio no se considera válido.</p>
 <hr  />
 <h1><a class="anchor" id="lesson00_next"></a>
 Siguiente lección</h1>
 <p>Lesson 01 – Tipos de datos, scope y calificadores </p>
 </div></div><!-- contents -->
-</div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['mínimo_20indispensable_0',['Git básico (mínimo indispensable)',['../cpp_lesson_00.html#lesson00_git_basic',1,'']]],
+  ['mínimo_20indispensable_0',['Git básico (mínimo indispensable)',['../group__cpp__lesson__00.html#lesson00_git_basic',1,'']]],
   ['mainpage_2edox_1',['mainpage.dox',['../mainpage_8dox.html',1,'']]],
   ['map_2',['Map',['../namespaceMathUtils.html#a5a147f403cbd325ff8278387b654872a',1,'MathUtils']]],
   ['mathutils_3',['MathUtils',['../namespaceMathUtils.html',1,'']]],
