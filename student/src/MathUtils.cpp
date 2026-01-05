@@ -1,19 +1,17 @@
-/**
- * @file MathUtils.h
- * @brief Utility math functions (structured C++ foundation).
- */
+#include "MathUtils.h"
+
 namespace MathUtils {
 
-/**
- * @brief Clamp x to the inclusive range [minVal, maxVal].
- */
-float Clamp(float x, float minVal, float maxVal);
-
-/**
- * @brief Linearly map x from [inMin, inMax] to [outMin, outMax].
- *
- * @note For now, assumes inMax != inMin.
- */
-float Map(float x, float inMin, float inMax, float outMin, float outMax);
-
+float Clamp(float x, float minVal, float maxVal) {
+    if (x < minVal) return minVal;
+    if (x > maxVal) return maxVal;
+    return x;
 }
+
+float Map(float x, float inMin, float inMax, float outMin, float outMax) {
+    const float denom = (inMax - inMin);
+    const float t = (x - inMin) / denom;
+    return outMin + t * (outMax - outMin);
+}
+
+} // namespace MathUtils
