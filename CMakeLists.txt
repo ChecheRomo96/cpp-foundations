@@ -42,6 +42,10 @@ if(ENABLE_TESTING)
     tests/test_math_utils.cpp
   )
 
+  target_include_directories(UnitTests PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/student/include
+)
+
   target_link_libraries(UnitTests
     PRIVATE
       FoundationsLib
