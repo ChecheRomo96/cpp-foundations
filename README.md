@@ -1,4 +1,3 @@
-cat > README.md <<'EOF'
 # cpp-foundations
 
 C++ foundations repo with:
