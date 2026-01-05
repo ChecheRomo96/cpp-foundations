@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['y_20calificadores_0',['y calificadores',['../group__cpp__lesson__01.html',1,'Lesson 01 – Tipos de datos, scope y calificadores'],['../index.html#mainpage_lesson01',1,'Lesson 01 – Tipos de datos, scope y calificadores']]],
-  ['y_20preparar_20el_20repositorio_1',['Clonar y preparar el repositorio',['../group__cpp__lesson__00.html#lesson00_repo',1,'']]],
-  ['y_20pruebas_20locales_2',['Compilación y pruebas locales',['../index.html#mainpage_local_build',1,'']]],
-  ['y_20release_3',['Configuración Debug y Release',['../group__cpp__lesson__00.html#lesson00_build_debug_release',1,'']]],
-  ['y_20soluciones_20rápidas_4',['Errores comunes y soluciones rápidas',['../group__cpp__lesson__00.html#lesson00_troubleshooting',1,'']]]
+  ['–_20configuración_20del_20entorno_20de_20trabajo_0',['Lesson 00 – Configuración del entorno de trabajo',['../index.html#mainpage_lesson00',1,'']]],
+  ['–_20configuración_20del_20entorno_20de_20trabajo_20local_1',['Lesson 00 – Configuración del entorno de trabajo (local)',['../group__cpp__lesson__00.html',1,'']]],
+  ['–_20course_2',['C++ Foundations – Course',['../group__cpp__course.html',1,'']]],
+  ['–_20tipos_20de_20datos_20scope_20y_20calificadores_3',['– tipos de datos scope y calificadores',['../group__cpp__lesson__01.html',1,'Lesson 01 – Tipos de datos, scope y calificadores'],['../index.html#mainpage_lesson01',1,'Lesson 01 – Tipos de datos, scope y calificadores']]]
 ];
