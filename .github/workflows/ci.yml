@@ -82,9 +82,18 @@ jobs:
       - name: Build
         run: cmake --build build
 
-      - name: Run unit tests
+      # IMPORTANT:
+      # Use ctest from inside build/ so .gcda files are generated where lcov expects them.
+      - name: Run tests (ctest)
         run: |
-          ./build/UnitTests --gtest_output=xml:gtest.xml
+          cd build
+          ctest --output-on-failure
+
+      # Export gtest XML for unit test HTML report (run from build/)
+      - name: Export gtest xml
+        run: |
+          cd build
+          ./UnitTests --gtest_output=xml:../gtest.xml
 
       # --------------------------------------------------
       # Prepare site structure
@@ -149,9 +158,8 @@ jobs:
           lcov --directory build \
                --capture \
                --output-file coverage.info \
-               --ignore-errors mismatch,empty \
+               --ignore-errors mismatch \
                --rc geninfo_unexecuted_blocks=1
-
 
           lcov --remove coverage.info \
             '/usr/*' \
