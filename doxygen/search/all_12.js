@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['–_20course_0',['C++ Foundations – Course',['../group__cpp__course.html',1,'']]],
-  ['–_20introducción_20al_20repositorio_20y_20flujo_20de_20trabajo_1',['Lesson 00 – Introducción al repositorio y flujo de trabajo',['../group__cpp__lesson__00.html',1,'']]],
-  ['–_20tipos_20de_20datos_20scope_20y_20calificadores_2',['Lesson 01 – Tipos de datos, scope y calificadores',['../group__cpp__lesson__01.html',1,'']]]
+  ['test_0',['Local build + test',['../md_README.html#autotoc_md23',1,'']]],
+  ['tipos_20de_20datos_20scope_20y_20calificadores_1',['Lesson 01 – Tipos de datos, scope y calificadores',['../group__cpp__lesson__01.html',1,'']]],
+  ['trabajo_20local_2',['Lesson 00 – Configuración del entorno de trabajo (local)',['../group__cpp__lesson__00.html',1,'']]]
 ];

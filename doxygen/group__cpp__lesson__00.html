@@ -87,19 +87,263 @@ Collaboration diagram for Lesson 00:</div>
 <p>Introducción al repositorio y flujo de trabajo. </p>
 
 
-<h3><a id="cpp_lesson_00_page" name="cpp_lesson_00_page"></a>Lesson 00 – Introducción al repositorio y flujo de trabajo</h3><div class="textblock"><h1><a class="anchor" id="lesson00_objectives"></a>
+<h3><a id="cpp_lesson_00_page" name="cpp_lesson_00_page"></a>Lesson 00 – Configuración del entorno de trabajo (local)</h3><div class="textblock"><h1><a class="anchor" id="lesson00_objectives"></a>
 Objetivos</h1>
 <p>Al finalizar esta lección, el estudiante será capaz de:</p><ul>
-<li>Comprender el propósito del repositorio cpp-foundations</li>
-<li>Configurar su entorno de trabajo para C++</li>
-<li>Instalar y verificar las herramientas necesarias</li>
-<li>Navegar correctamente la estructura del proyecto</li>
-<li>Usar la terminal para interactuar con Git y el sistema</li>
-<li>Seguir el flujo de trabajo esperado del curso</li>
+<li>Instalar y verificar las herramientas necesarias para el curso</li>
+<li>Clonar el repositorio y entender la estructura mínima</li>
+<li>Configurar un flujo local con CMake (build fuera del árbol)</li>
+<li>Compilar el proyecto en modo Debug/Release</li>
+<li>Ejecutar pruebas localmente usando CTest</li>
+<li>Diagnosticar errores comunes de compilación y configuración</li>
 </ul>
-<h1><a class="anchor" id="lesson00_environment"></a>
-Configuración del entorno de trabajo</h1>
-<p>... (aquí va TODO tu contenido expandido) </p>
+<hr  />
+<h1><a class="anchor" id="lesson00_prereq"></a>
+Requisitos mínimos</h1>
+<p>Se requiere:</p><ul>
+<li>Acceso a una terminal tipo UNIX (Linux/macOS o Windows con WSL)</li>
+<li>Un compilador de C++ (GCC o Clang)</li>
+<li>Git</li>
+<li>CMake</li>
+</ul>
+<p>Recomendado:</p><ul>
+<li>Un editor como VS Code, CLion o similar</li>
+<li>Un depurador (gdb o lldb)</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="lesson00_supported_os"></a>
+Sistemas operativos soportados</h1>
+<p>El curso funciona en:</p><ul>
+<li>Linux (recomendado)</li>
+<li>macOS</li>
+<li>Windows usando WSL (recomendado sobre MSVC para este curso)</li>
+</ul>
+<p>Nota: Si usas Windows, el flujo recomendado es instalar WSL2 con Ubuntu.</p>
+<hr  />
+<h1><a class="anchor" id="lesson00_install"></a>
+Instalación de herramientas</h1>
+<h2><a class="anchor" id="lesson00_install_linux"></a>
+Linux (Ubuntu/Debian)</h2>
+<div class="fragment"><div class="line">sudo apt update</div>
+<div class="line">sudo apt install -y build-essential git cmake</div>
+</div><!-- fragment --><p>Opcional (recomendado para debug):</p>
+<div class="fragment"><div class="line">sudo apt install -y gdb</div>
+</div><!-- fragment --><hr  />
+<h2><a class="anchor" id="lesson00_install_macos"></a>
+macOS</h2>
+<p>Instala Xcode Command Line Tools:</p>
+<div class="fragment"><div class="line">xcode-select --install</div>
+</div><!-- fragment --><p>Instala CMake y Git con Homebrew:</p>
+<div class="fragment"><div class="line">brew install git cmake</div>
+</div><!-- fragment --><p>Opcional (depuración):</p><ul>
+<li>lldb ya viene integrado con Xcode Command Line Tools</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="lesson00_install_windows"></a>
+Windows (WSL2 + Ubuntu)</h2>
+<p>1) Instala WSL2 y Ubuntu (desde Microsoft Store). 2) Abre Ubuntu y ejecuta:</p>
+<div class="fragment"><div class="line">sudo apt update</div>
+<div class="line">sudo apt install -y build-essential git cmake</div>
+</div><!-- fragment --><p>Recomendación:</p><ul>
+<li>Trabaja dentro del filesystem de WSL (ej. /home/&lt;user&gt;/projects)</li>
+<li>Evita compilar en /mnt/c/ para no degradar el rendimiento</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="lesson00_verify"></a>
+Verificación de instalación</h1>
+<p>Ejecuta estos comandos y confirma que muestran versiones:</p>
+<div class="fragment"><div class="line">g++ --version</div>
+<div class="line">git --version</div>
+<div class="line">cmake --version</div>
+</div><!-- fragment --><p>Si alguno falla:</p><ul>
+<li>No continúes con el curso todavía</li>
+<li>Resuelve la instalación primero</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="lesson00_repo"></a>
+Clonar y preparar el repositorio</h1>
+<p>Clonar:</p>
+<div class="fragment"><div class="line">git clone &lt;url-del-repositorio&gt;</div>
+<div class="line">cd cpp-foundations</div>
+</div><!-- fragment --><p>Verifica el estado:</p>
+<div class="fragment"><div class="line">git status</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="lesson00_structure"></a>
+Estructura mínima del repositorio</h1>
+<p>(Resumen de carpetas relevantes)</p>
+<div class="fragment"><div class="line">cpp-foundations/</div>
+<div class="line">├── student/</div>
+<div class="line">│   ├── include/</div>
+<div class="line">│   └── src/</div>
+<div class="line">├── docs/</div>
+<div class="line">│   └── topics/</div>
+<div class="line">├── CMakeLists.txt</div>
+<div class="line">└── README.md</div>
+</div><!-- fragment --><p>Regla del curso:</p><ul>
+<li>El estudiante solo modifica student/</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="lesson00_build"></a>
+Flujo de compilación local con CMake</h1>
+<p>Este curso usa un flujo estándar:</p><ul>
+<li>Configurar el proyecto en una carpeta de build</li>
+<li>Compilar desde esa carpeta</li>
+<li>Ejecutar pruebas</li>
+</ul>
+<h2><a class="anchor" id="lesson00_build_out_of_source"></a>
+Build fuera del árbol (recomendado)</h2>
+<p>Desde la raíz del repo:</p>
+<div class="fragment"><div class="line">mkdir -p build</div>
+<div class="line">cmake -S . -B build</div>
+<div class="line">cmake --build build</div>
+</div><!-- fragment --><p>Explicación:</p><ul>
+<li>cmake -S . -B build : configura el proyecto (source = ., build = build)</li>
+<li>cmake &ndash;build build : compila</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="lesson00_build_debug_release"></a>
+Configuración Debug y Release</h2>
+<p>CMake soporta modos de compilación. En generadores tipo Makefiles/Ninja se define con CMAKE_BUILD_TYPE:</p>
+<p>Debug:</p>
+<div class="fragment"><div class="line">cmake -S . -B build-debug -DCMAKE_BUILD_TYPE=Debug</div>
+<div class="line">cmake --build build-debug</div>
+</div><!-- fragment --><p>Release:</p>
+<div class="fragment"><div class="line">cmake -S . -B build-release -DCMAKE_BUILD_TYPE=Release</div>
+<div class="line">cmake --build build-release</div>
+</div><!-- fragment --><p>Recomendación del curso:</p><ul>
+<li>Debug para desarrollo y depuración</li>
+<li>Release para medir rendimiento (cuando aplique)</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="lesson00_build_clean"></a>
+Limpiar build (cuando sea necesario)</h2>
+<p>Si cambias algo importante del entorno o el CMakeLists, a veces conviene borrar build:</p>
+<div class="fragment"><div class="line">rm -rf build</div>
+<div class="line">mkdir -p build</div>
+<div class="line">cmake -S . -B build</div>
+<div class="line">cmake --build build</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="lesson00_tests"></a>
+Ejecutar pruebas localmente</h1>
+<p>Este repositorio está diseñado para correr pruebas localmente si están configuradas. El estándar de CMake para pruebas es CTest.</p>
+<h2><a class="anchor" id="lesson00_tests_build"></a>
+Asegurar que el proyecto está compilado</h2>
+<div class="fragment"><div class="line">cmake -S . -B build</div>
+<div class="line">cmake --build build</div>
+</div><!-- fragment --><h2><a class="anchor" id="lesson00_tests_ctest"></a>
+Ejecutar pruebas con CTest</h2>
+<p>Ejecutar todas las pruebas:</p>
+<div class="fragment"><div class="line">ctest --test-dir build</div>
+</div><!-- fragment --><p>Ejecutar con salida detallada (recomendado cuando falle algo):</p>
+<div class="fragment"><div class="line">ctest --test-dir build --output-on-failure</div>
+</div><!-- fragment --><p>Ejecutar pruebas en paralelo (si tu máquina lo soporta):</p>
+<div class="fragment"><div class="line">ctest --test-dir build -j 4 --output-on-failure</div>
+</div><!-- fragment --><p>Nota:</p><ul>
+<li>Si "ctest" dice "No tests were found", entonces el proyecto todavía no tiene pruebas registradas o la opción de pruebas no está habilitada.</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="lesson00_run"></a>
+Ejecutar ejecutables localmente</h1>
+<p>Dependiendo de cómo esté definido el proyecto, los ejecutables suelen quedar en:</p><ul>
+<li>build/ (o subcarpetas internas)</li>
+</ul>
+<p>Ejemplo genérico:</p>
+<div class="fragment"><div class="line">./build/&lt;nombre_del_ejecutable&gt;</div>
+</div><!-- fragment --><p>Si no sabes el nombre del ejecutable:</p>
+<div class="fragment"><div class="line">ls build</div>
+</div><!-- fragment --><p>Si el proyecto usa subdirectorios:</p>
+<div class="fragment"><div class="line">find build -maxdepth 3 -type f -perm -111</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="lesson00_debug"></a>
+Depuración local (mínimo indispensable)</h1>
+<h2><a class="anchor" id="lesson00_debug_gdb"></a>
+Linux/WSL (gdb)</h2>
+<p>Compila en Debug y ejecuta:</p>
+<div class="fragment"><div class="line">gdb ./build-debug/&lt;ejecutable&gt;</div>
+</div><!-- fragment --><p>Comandos útiles dentro de gdb:</p><ul>
+<li>run</li>
+<li>bt</li>
+<li>break &lt;archivo:linea&gt;</li>
+<li>next</li>
+<li>step</li>
+<li>print &lt;variable&gt;</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="lesson00_debug_lldb"></a>
+macOS (lldb)</h2>
+<p>Compila en Debug y ejecuta:</p>
+<div class="fragment"><div class="line">lldb ./build-debug/&lt;ejecutable&gt;</div>
+</div><!-- fragment --><p>Comandos útiles dentro de lldb:</p><ul>
+<li>run</li>
+<li>bt</li>
+<li>breakpoint set &ndash;file &lt;archivo&gt; &ndash;line &lt;n&gt;</li>
+<li>next</li>
+<li>step</li>
+<li>frame variable</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="lesson00_git_workflow"></a>
+Flujo de Git esperado (local)</h1>
+<p>Ver estado:</p>
+<div class="fragment"><div class="line">git status</div>
+</div><!-- fragment --><p>Agregar solo cambios del alumno:</p>
+<div class="fragment"><div class="line">git add student/</div>
+</div><!-- fragment --><p>Commit con mensaje claro:</p>
+<div class="fragment"><div class="line">git commit -m <span class="stringliteral">&quot;Lesson 00: local build and test workflow&quot;</span></div>
+</div><!-- fragment --><p>Subir cambios:</p>
+<div class="fragment"><div class="line">git push</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="lesson00_troubleshooting"></a>
+Errores comunes y soluciones rápidas</h1>
+<h2><a class="anchor" id="lesson00_troubleshooting_cmake"></a>
+CMake no encuentra compilador</h2>
+<p>Síntoma:</p><ul>
+<li>CMake dice que no encuentra C/C++ compiler</li>
+</ul>
+<p>Solución:</p><ul>
+<li>Instala build-essential (Linux/WSL)</li>
+<li>En macOS instala xcode-select &ndash;install</li>
+<li>Revisa que g++ &ndash;version funcione</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="lesson00_troubleshooting_cache"></a>
+CMake se queda "atorado" con config vieja</h2>
+<p>Síntoma:</p><ul>
+<li>Cambiaste cosas y no se reflejan</li>
+</ul>
+<p>Solución:</p><ul>
+<li>Borra build y regenera</li>
+</ul>
+<div class="fragment"><div class="line">rm -rf build</div>
+<div class="line">cmake -S . -B build</div>
+<div class="line">cmake --build build</div>
+</div><!-- fragment --><hr  />
+<h2><a class="anchor" id="lesson00_troubleshooting_tests"></a>
+No aparecen pruebas</h2>
+<p>Síntoma:</p><ul>
+<li>ctest: No tests were found</li>
+</ul>
+<p>Posibles causas:</p><ul>
+<li>Aún no hay pruebas registradas</li>
+<li>El proyecto requiere una opción para habilitar pruebas</li>
+</ul>
+<p>Acción:</p><ul>
+<li>Revisa el README del repo o la lección correspondiente a pruebas</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="lesson00_checklist"></a>
+Checklist final</h1>
+<p>Antes de pasar a Lesson 01, el estudiante debe poder ejecutar:</p>
+<div class="fragment"><div class="line">git clone &lt;url-del-repositorio&gt;</div>
+<div class="line">cd cpp-foundations</div>
+<div class="line">cmake -S . -B build</div>
+<div class="line">cmake --build build</div>
+<div class="line">ctest --test-dir build --output-on-failure</div>
+</div><!-- fragment --><p>Si esto funciona, el entorno está listo.</p>
+<hr  />
+<h1><a class="anchor" id="lesson00_next"></a>
+Siguiente lección</h1>
+<p>Lesson 01 – Tipos de datos, scope y calificadores </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
