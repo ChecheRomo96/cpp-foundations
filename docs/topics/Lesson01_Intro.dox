@@ -1,25 +1,217 @@
 /**
- * @defgroup lesson_01_intro Lección 01 — Introducción a C/C++ y el flujo de compilación
- * @ingroup course_cpp_foundations
- * @brief Objetivos, teoría y actividad de la lección 01.
+ * @page cpp_lesson_01 Lesson 01 – Tipos de datos, scope y calificadores
  *
- * @section l01_objectives Objetivos
- * - Entender qué es compilar vs linkear.
- * - Diferenciar archivo fuente (.cpp), header (.h/.hpp) y librería.
- * - Ejecutar el pipeline del repo: build + tests.
+ * @brief Fundamentos de tipos de datos, alcance de variables y uso de
+ *        calificadores como static y const en C++.
  *
- * @section l01_reading Contenido
- * - Translation units (unidad de compilación)
- * - Símbolos, linker, “undefined reference”
- * - Estructura mínima de un proyecto
+ * @section lesson01_objectives Objetivos
  *
- * @section l01_activity Actividad
- * **Actividad 01 (autoevaluable):**
- * - Completa `student/src/MathUtils.cpp` para que pasen las pruebas.
+ * Al finalizar esta lección, el estudiante será capaz de:
+ * - Identificar los tipos de datos fundamentales en C++
+ * - Comprender el concepto de scope (alcance) de las variables
+ * - Diferenciar entre variables locales, globales y estáticas
+ * - Usar correctamente los calificadores static y const
+ * - Evitar errores comunes relacionados con vida útil y mutabilidad
  *
- * @section l01_deliverable Entregable
- * - Pull Request con cambios únicamente en `student/`
+ * ----------------------------------------------------------------------
  *
- * @section l01_rubric Evaluación
- * - % de tests pasados: 100% del puntaje de la actividad
+ * @section lesson01_types Tipos de datos fundamentales
+ *
+ * C++ es un lenguaje fuertemente tipado. Cada variable tiene un tipo
+ * que define:
+ * - Cuánta memoria ocupa
+ * - Qué operaciones son válidas
+ * - Cómo se interpreta su valor
+ *
+ * Tipos básicos comunes:
+ *
+ * | Tipo   | Uso típico                     |
+ * |--------|--------------------------------|
+ * | bool   | Estados lógicos                |
+ * | char   | Caracteres o bytes             |
+ * | int    | Enteros generales              |
+ * | float  | Números reales (precisión simple) |
+ * | double | Números reales (precisión doble)  |
+ * | void   | Ausencia de tipo               |
+ *
+ * @code
+ * int contador = 0;
+ * float voltaje = 3.3f;
+ * bool activo = true;
+ * @endcode
+ *
+ * El tamaño exacto de cada tipo depende de la arquitectura y la plataforma.
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section lesson01_scope Scope (alcance de las variables)
+ *
+ * El scope determina desde dónde una variable es visible y accesible
+ * dentro del programa.
+ *
+ * @subsection lesson01_scope_local Scope local
+ *
+ * Variables declaradas dentro de un bloque {}.
+ *
+ * @code
+ * void ejemplo() {
+ *     int x = 10;
+ * }
+ * @endcode
+ *
+ * - Solo existen dentro del bloque
+ * - Se destruyen al salir del bloque
+ * - Son la opción más segura y recomendada
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @subsection lesson01_scope_global Scope global
+ *
+ * Variables declaradas fuera de cualquier función.
+ *
+ * @code
+ * int g_contador = 0;
+ *
+ * void incrementar() {
+ *     g_contador++;
+ * }
+ * @endcode
+ *
+ * Desventajas:
+ * - Dependencias implícitas
+ * - Mayor riesgo de errores
+ * - Dificultan pruebas y mantenimiento
+ *
+ * Regla general: evitar variables globales siempre que sea posible.
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @subsection lesson01_scope_block Scope de bloque
+ *
+ * Cualquier par de llaves crea un nuevo scope.
+ *
+ * @code
+ * if (condicion) {
+ *     int temp = 5;
+ * }
+ * // temp no existe aquí
+ * @endcode
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section lesson01_static Variables static
+ *
+ * El calificador static modifica la duración de vida de una variable.
+ *
+ * @subsection lesson01_static_function static dentro de funciones
+ *
+ * @code
+ * void contador() {
+ *     static int veces = 0;
+ *     veces++;
+ * }
+ * @endcode
+ *
+ * - Se inicializa una sola vez
+ * - Conserva su valor entre llamadas
+ * - Vive durante toda la ejecución del programa
+ * - Sigue teniendo scope local
+ *
+ * Usos comunes:
+ * - Contadores
+ * - Estados persistentes
+ * - Máquinas de estado simples
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @subsection lesson01_static_file static a nivel de archivo
+ *
+ * @code
+ * static int archivoInterno = 42;
+ * @endcode
+ *
+ * - Visible solo dentro del archivo fuente
+ * - Evita colisiones de nombres entre archivos
+ * - Muy usado en librerías
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section lesson01_const El calificador const
+ *
+ * const indica que una variable no puede modificarse después de inicializarse.
+ *
+ * @code
+ * const int maxUsuarios = 10;
+ * @endcode
+ *
+ * Intentar modificarla produce un error de compilación.
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @subsection lesson01_const_functions const en funciones
+ *
+ * @code
+ * int sumar(const int a, const int b) {
+ *     return a + b;
+ * }
+ * @endcode
+ *
+ * Beneficios:
+ * - Mayor seguridad
+ * - Código más claro
+ * - Mejores contratos de función
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @subsection lesson01_const_pointers const y punteros
+ *
+ * @code
+ * const int* p1;   // el valor apuntado es constante
+ * int* const p2;   // el puntero es constante
+ * @endcode
+ *
+ * Este concepto se profundizará en la lección de punteros.
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section lesson01_const_static Combinación de const y static
+ *
+ * Es común combinar ambos calificadores:
+ *
+ * @code
+ * static const int bufferSize = 256;
+ * @endcode
+ *
+ * Esto crea una constante persistente con scope controlado.
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section lesson01_errors Errores comunes
+ *
+ * - Usar variables fuera de su scope
+ * - Abusar de variables globales
+ * - Olvidar que static conserva su valor
+ * - No usar const cuando corresponde
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section lesson01_practices Buenas prácticas
+ *
+ * - Preferir scope local
+ * - Usar const siempre que sea posible
+ * - Usar static solo cuando tenga sentido semántico
+ * - Pensar en vida útil y no solo en visibilidad
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section lesson01_keyidea Idea clave
+ *
+ * C++ otorga control total sobre memoria y comportamiento,
+ * pero exige comprender tipos, alcance y duración de vida.
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section lesson01_next Siguiente lección
+ *
+ * Lesson 02 – Punteros, referencias y memoria
  */

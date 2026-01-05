@@ -1,0 +1,188 @@
+/**
+ * @page cpp_lesson_00 Lesson 00 – Introducción al repositorio y flujo de trabajo
+ *
+ * @brief Introducción al repositorio cpp-foundations, su estructura y el flujo
+ *        de trabajo esperado para el curso.
+ *
+ * @section lesson00_objectives Objetivos
+ *
+ * Al finalizar esta lección, el estudiante será capaz de:
+ * - Comprender el propósito del repositorio cpp-foundations
+ * - Navegar correctamente la estructura del proyecto
+ * - Entender cómo se organiza el contenido del curso
+ * - Seguir el flujo básico de trabajo con Git y GitHub
+ * - Saber dónde escribir código y dónde no
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section lesson00_repo_about ¿Qué es cpp-foundations?
+ *
+ * cpp-foundations es un repositorio educativo diseñado para:
+ *
+ * - Enseñar C++ desde fundamentos reales
+ * - Promover buenas prácticas desde el inicio
+ * - Simular un entorno de trabajo profesional
+ * - Separar claramente código del alumno y código base
+ *
+ * Este repositorio NO es solo una colección de ejemplos,
+ * es un entorno de aprendizaje estructurado.
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section lesson00_repo_structure Estructura del repositorio
+ *
+ * La estructura general del repositorio es la siguiente:
+ *
+ * @code
+ * cpp-foundations/
+ * ├── student/
+ * │   ├── include/
+ * │   └── src/
+ * ├── docs/
+ * │   └── topics/
+ * ├── README.md
+ * └── CMakeLists.txt
+ * @endcode
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @subsection lesson00_student_folder Carpeta student/
+ *
+ * Esta es la ÚNICA carpeta que el estudiante debe modificar.
+ *
+ * @code
+ * student/
+ * ├── include/   // Headers creados por el alumno
+ * └── src/       // Código fuente del alumno
+ * @endcode
+ *
+ * Reglas importantes:
+ * - Todo el código del alumno vive aquí
+ * - No modificar archivos fuera de student/
+ * - El CI del repositorio valida esta regla
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @subsection lesson00_docs_folder Carpeta docs/
+ *
+ * Contiene la documentación del curso.
+ *
+ * @code
+ * docs/
+ * └── topics/
+ *     ├── Lesson00.dox
+ *     ├── Lesson01.dox
+ *     └── ...
+ * @endcode
+ *
+ * Estas lecciones se generan automáticamente usando Doxygen.
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section lesson00_workflow Flujo de trabajo esperado
+ *
+ * El flujo de trabajo básico es:
+ *
+ * 1. Clonar el repositorio
+ * 2. Crear o modificar archivos SOLO en student/
+ * 3. Hacer commits claros y pequeños
+ * 4. Subir cambios a GitHub
+ * 5. Verificar que el CI pase correctamente
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section lesson00_git_basic Git básico (mínimo indispensable)
+ *
+ * Clonar el repositorio:
+ *
+ * @code
+ * git clone <url-del-repositorio>
+ * @endcode
+ *
+ * Ver el estado del repositorio:
+ *
+ * @code
+ * git status
+ * @endcode
+ *
+ * Agregar cambios:
+ *
+ * @code
+ * git add student/
+ * @endcode
+ *
+ * Crear un commit:
+ *
+ * @code
+ * git commit -m "Lesson 01: variables and scope"
+ * @endcode
+ *
+ * Subir cambios:
+ *
+ * @code
+ * git push
+ * @endcode
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section lesson00_commit_rules Reglas de commits
+ *
+ * Buenas prácticas:
+ * - Commits pequeños
+ * - Mensajes claros
+ * - Un commit por avance lógico
+ *
+ * Ejemplos correctos:
+ * - "Lesson 00: project setup"
+ * - "Lesson 01: data types examples"
+ *
+ * Ejemplos incorrectos:
+ * - "changes"
+ * - "final"
+ * - "fix"
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section lesson00_ci Continuous Integration (CI)
+ *
+ * El repositorio utiliza GitHub Actions para:
+ *
+ * - Verificar que solo se modifique student/
+ * - Compilar el código
+ * - Generar reportes
+ *
+ * Si el CI falla:
+ * - El código NO se considera válido
+ * - El cambio debe corregirse
+ *
+ * Aprender a leer errores del CI es parte del curso.
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section lesson00_expectations Expectativas del curso
+ *
+ * Se espera que el estudiante:
+ * - Lea las lecciones antes de programar
+ * - Entienda el código que escribe
+ * - No copie código sin comprenderlo
+ * - Use el repositorio como herramienta de aprendizaje
+ *
+ * Este curso prioriza:
+ * - Claridad sobre velocidad
+ * - Fundamentos sobre trucos
+ * - Código correcto sobre código rápido
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section lesson00_keyidea Idea clave
+ *
+ * El repositorio es parte del curso.
+ * Aprender a trabajar con estructura, control de versiones y reglas
+ * es tan importante como aprender C++.
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section lesson00_next Siguiente lección
+ *
+ * Lesson 01 – Tipos de datos, scope y calificadores
+ */
