@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['namespaces_0',['Lección 02 — Funciones, scope y namespaces',['../group__lesson__02__functions__namespaces.html',1,'']]]
+  ['objetivos_0',['objetivos',['../group__cpp__lesson__00.html#lesson00_objectives',1,'Objetivos'],['../group__cpp__lesson__01.html#lesson01_objectives',1,'Objetivos']]]
 ];

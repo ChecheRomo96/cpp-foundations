@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['de_20compilación_0',['Lección 03 — Headers, includes y modelo de compilación',['../group__lesson__03__headers__compilation.html',1,'']]]
+  ['lesson_2000_0',['Lesson 00',['../group__cpp__lesson__00.html',1,'']]],
+  ['lesson_2001_1',['Lesson 01',['../group__cpp__lesson__01.html',1,'']]]
 ];
