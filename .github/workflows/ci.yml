@@ -87,14 +87,16 @@ jobs:
       # Run the instrumented binary to generate .gcda
       - name: Run UnitTests (generate gcda)
         run: |
-          cd build
-          ./UnitTests --gtest_brief=1
+          set -euxo pipefail
+          echo "Looking for UnitTests..."
+          find build -maxdepth 4 -type f -name "UnitTests" -print
+          (cd build && ./UnitTests --gtest_brief=1)
 
       # Export gtest XML for unit test HTML report
       - name: Export gtest xml
         run: |
-          cd build
-          ./UnitTests --gtest_output=xml:../gtest.xml
+          set -euxo pipefail
+          (cd build && ./UnitTests --gtest_output=xml:../gtest.xml)
 
       # --------------------------------------------------
       # Prepare site structure
@@ -169,18 +171,35 @@ jobs:
 
       - name: Generate coverage report
         run: |
+          set -euxo pipefail
+
           lcov --directory build \
                --capture \
                --output-file coverage.info \
                --ignore-errors mismatch,empty \
                --rc geninfo_unexecuted_blocks=1
 
+          # If coverage.info is empty, create a placeholder and continue
+          if ! grep -q "^SF:" coverage.info; then
+            echo "No coverage data (coverage.info has no SF: entries). Creating placeholder page."
+            mkdir -p site/coverage
+            cat > site/coverage/index.html <<'EOF'
+            
+          <!doctype html>
+          <html><body>
+          <h1>Coverage report</h1>
+          <p>No coverage data was generated (.gcno/.gcda not found). Check CI logs.</p>
+          </body></html>
+          EOF
+            exit 0
+          fi
+
           lcov --remove coverage.info \
             '/usr/*' \
             '*/_deps/*' \
             '*/tests/*' \
             --output-file coverage.filtered.info \
-            --ignore-errors mismatch,empty \
+            --ignore-errors mismatch,empty,unused \
             --rc geninfo_unexecuted_blocks=1
 
           genhtml coverage.filtered.info --output-directory site/coverage
@@ -190,11 +209,12 @@ jobs:
       # --------------------------------------------------
       - name: Generate Doxygen docs
         run: |
+          set -euxo pipefail
           doxygen docs/Doxyfile
           cp -R docs_out/html/* site/doxygen/
 
       # --------------------------------------------------
-      # Landing page (no heredoc/EOF)
+      # Landing page
       # --------------------------------------------------
       - name: Create index page
         shell: bash
