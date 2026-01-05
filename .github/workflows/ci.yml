@@ -1,4 +1,4 @@
-name: CI + Coverage
+name: CI + Publish Reports
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  guard_test_coverage:
+  build_test_publish:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,6 +18,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      # --------------------------------------------------
+      # Guard: alumnos solo pueden modificar student/
+      # --------------------------------------------------
       - name: "Guard: only student/ changes allowed"
         if: vars.COURSE_GUARD_ENABLED == 'true'
         shell: bash
@@ -38,53 +41,110 @@ jobs:
             HEAD_SHA="$PUSH_SHA"
           fi
 
-          echo "BASE_SHA=$BASE_SHA"
-          echo "HEAD_SHA=$HEAD_SHA"
-
           if [ "$BASE_SHA" = "0000000000000000000000000000000000000000" ]; then
             echo "Initial push detected; skipping guard."
             exit 0
           fi
 
           CHANGED_FILES="$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" || true)"
-
           if [ -z "$CHANGED_FILES" ]; then
             echo "No changed files."
             exit 0
           fi
 
-          echo "Changed files:"
-          echo "$CHANGED_FILES"
-
           VIOLATIONS="$(echo "$CHANGED_FILES" | grep -vE '^student/' || true)"
-
           if [ -n "$VIOLATIONS" ]; then
-            echo ""
             echo "ERROR: Only changes under student/ are allowed."
-            echo "The following files violate the policy:"
             echo "$VIOLATIONS"
             exit 1
           fi
 
-          echo "Guard OK: all changes are under student/."
+          echo "Guard OK."
 
+      # --------------------------------------------------
+      # Tooling
+      # --------------------------------------------------
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake g++ lcov doxygen graphviz
+          sudo apt-get install -y \
+            cmake g++ lcov doxygen graphviz python3
 
+      # --------------------------------------------------
+      # Build + Tests
+      # --------------------------------------------------
       - name: Configure (coverage)
-        run: cmake -S . -B build -DENABLE_TESTING=ON -DENABLE_COVERAGE=ON -DCMAKE_BUILD_TYPE=Debug
+        run: cmake -S . -B build \
+          -DENABLE_TESTING=ON \
+          -DENABLE_COVERAGE=ON \
+          -DCMAKE_BUILD_TYPE=Debug
 
       - name: Build
         run: cmake --build build
 
-      - name: Run tests
+      - name: Run unit tests
         run: |
-          cd build
-          ctest --output-on-failure
+          ./build/UnitTests --gtest_output=xml:gtest.xml
 
-      - name: Capture coverage
+      # --------------------------------------------------
+      # Prepare site structure
+      # --------------------------------------------------
+      - name: Prepare site folders
+        run: |
+          rm -rf site grading
+          mkdir -p site/unit_tests site/coverage site/doxygen
+          mkdir -p grading/unit_tests grading/coverage grading/doxygen
+
+      # --------------------------------------------------
+      # Unit test HTML report
+      # --------------------------------------------------
+      - name: Generate unit test report
+        run: |
+          python3 - <<'PY'
+          import xml.etree.ElementTree as ET
+          from pathlib import Path
+
+          root = ET.parse("gtest.xml").getroot()
+          tests = []
+
+          for suite in root.findall("testsuite"):
+              sname = suite.get("name", "")
+              for tc in suite.findall("testcase"):
+                  tname = tc.get("name", "")
+                  full = f"{sname}.{tname}"
+                  failed = tc.find("failure") is not None
+                  tests.append((full, not failed))
+
+          total = len(tests)
+          passed = sum(1 for _, ok in tests if ok)
+          pct = (100.0 * passed / total) if total else 0.0
+
+          rows = "\n".join(
+              f"<tr><td><code>{name}</code></td><td>{'PASS' if ok else 'FAIL'}</td></tr>"
+              for name, ok in tests
+          )
+
+          html = f"""<!doctype html>
+          <html>
+          <head><meta charset="utf-8"><title>Unit Tests</title></head>
+          <body>
+            <h1>Unit Tests</h1>
+            <p><b>Result:</b> {passed}/{total} passed ({pct:.1f}%)</p>
+            <table border="1" cellpadding="6">
+              <tr><th>Test</th><th>Status</th></tr>
+              {rows}
+            </table>
+          </body>
+          </html>
+          """
+
+          Path("site/unit_tests/index.html").write_text(html, encoding="utf-8")
+          PY
+
+      # --------------------------------------------------
+      # Coverage
+      # --------------------------------------------------
+      - name: Generate coverage report
         run: |
           lcov --directory build \
                --capture \
@@ -100,21 +160,43 @@ jobs:
             --ignore-errors mismatch \
             --rc geninfo_unexecuted_blocks=1
 
-          lcov --summary coverage.filtered.info
-          genhtml coverage.filtered.info --output-directory coverage_html
+          genhtml coverage.filtered.info --output-directory site/coverage
 
-      - name: Upload coverage HTML artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage_html
-          path: coverage_html
-
+      # --------------------------------------------------
+      # Doxygen
+      # --------------------------------------------------
       - name: Generate Doxygen docs
         run: |
-          doxygen ./docs/Doxyfile
+          doxygen docs/Doxyfile
+          cp -R docs_out/html/* site/doxygen/
 
-      - name: Upload Doxygen HTML artifact
-        uses: actions/upload-artifact@v4
+      # --------------------------------------------------
+      # Landing page
+      # --------------------------------------------------
+      - name: Create index page
+        run: |
+          cat > site/index.html <<'EOF'
+          <!doctype html>
+          <html>
+          <head><meta charset="utf-8"><title>cpp-foundations Reports</title></head>
+          <body>
+            <h1>cpp-foundations – Evaluation Reports</h1>
+            <ul>
+              <li><a href="unit_tests/">Unit Tests</a></li>
+              <li><a href="coverage/">Coverage</a></li>
+              <li><a href="doxygen/">Doxygen</a></li>
+            </ul>
+          </body>
+          </html>
+          EOF
+
+      # --------------------------------------------------
+      # Publish to GitHub Pages
+      # --------------------------------------------------
+      - name: Publish to GitHub Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          name: doxygen_html
-          path: docs_out/html
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: site
+          publish_branch: gh-pages
