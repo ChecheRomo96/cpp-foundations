@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['readme_2emd_0',['README.md',['../README_8md.html',1,'']]],
-  ['report_1',['CI coverage report',['../md_README.html#autotoc_md3',1,'']]],
-  ['resumen_2',['Build local (resumen)',['../index.html#build',1,'']]]
+  ['student_20work_20policy_0',['Student work policy',['../md_README.html#autotoc_md1',1,'']]]
 ];

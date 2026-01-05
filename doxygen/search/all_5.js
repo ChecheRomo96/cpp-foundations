@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['foundations_0',['foundations',['../md_README.html',1,'cpp-foundations'],['../index.html',1,'cpp-foundations']]]
+  ['header_20policy_0',['Header policy',['../md_README.html#autotoc_md4',1,'']]]
 ];
