@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['cpp_20foundations_0',['cpp foundations',['../index.html',1,'Cpp Foundations'],['../md_README.html',1,'cpp-foundations']]]
+  ['calificadores_0',['Lesson 01 – Tipos de datos, scope y calificadores',['../group__cpp__lesson__01.html',1,'']]],
+  ['cpp_20foundations_1',['cpp foundations',['../index.html',1,'Cpp Foundations'],['../md_README.html',1,'cpp-foundations']]]
 ];
