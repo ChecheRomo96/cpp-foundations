@@ -72,30 +72,30 @@ $(function() {
   <div class="headertitle"><div class="title">cpp-foundations</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md13"></a> C++ foundations repo with:</p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md24"></a> C++ foundations repo with:</p>
 <ul>
 <li>CMake</li>
 <li>GoogleTest (gtest)</li>
 <li>Coverage: gcov + lcov</li>
 <li>GitHub Actions CI</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md14"></a>
+<h1><a class="anchor" id="autotoc_md25"></a>
 Student work policy</h1>
 <p>You must only modify files under:</p>
 <ul>
 <li><code>student/**</code></li>
 </ul>
 <p>Any modification outside <code>student/</code> will fail CI.</p>
-<h1><a class="anchor" id="autotoc_md15"></a>
+<h1><a class="anchor" id="autotoc_md26"></a>
 Local build + test</h1>
 <div class="fragment"><div class="line">cmake -S . -B build -DENABLE_TESTING=ON -DCMAKE_BUILD_TYPE=Debug</div>
 <div class="line">cmake --build build</div>
 <div class="line">cd build</div>
 <div class="line">ctest --output-on-failure</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md16"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md27"></a>
 CI coverage report</h1>
 <p>GitHub Actions generates an HTML coverage report and uploads it as an artifact named coverage_html. Download it from the Actions run and open index.html.</p>
-<h1><a class="anchor" id="autotoc_md17"></a>
+<h1><a class="anchor" id="autotoc_md28"></a>
 Header policy</h1>
 <p>This repository uses classic include guards:</p>
 <ul>

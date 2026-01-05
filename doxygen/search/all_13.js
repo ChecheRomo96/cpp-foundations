@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['work_20policy_0',['Student work policy',['../md_README.html#autotoc_md14',1,'']]]
+  ['verificación_20de_20herramientas_0',['Verificación de herramientas',['../group__cpp__lesson__00.html#lesson00_verify',1,'']]]
 ];

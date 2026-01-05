@@ -87,7 +87,7 @@ Collaboration diagram for Lesson 00:</div>
 <p>Introducción al repositorio y flujo de trabajo. </p>
 
 
-<h3><a id="cpp_lesson_00_page" name="cpp_lesson_00_page"></a>Lesson 00 – Introducción al repositorio y flujo de trabajo</h3><div class="textblock"><h1><a class="anchor" id="lesson00_objectives"></a>
+<h3><a id="cpp_lesson_00_page" name="cpp_lesson_00_page"></a>Lesson 00 – Introducción al repositorio y flujo de trabajo</h3><div class="textblock">Onboarding técnico al curso cpp-foundations: entorno, herramientas, estructura del repositorio y flujo de trabajo.<h1><a class="anchor" id="lesson00_objectives"></a>
 Objetivos</h1>
 <p>Al finalizar esta lección, el estudiante será capaz de:</p><ul>
 <li>Comprender el propósito del repositorio cpp-foundations</li>
@@ -156,6 +156,165 @@ Continuous Integration (CI)</h1>
 <li>Que los reportes se generen correctamente</li>
 </ul>
 <p>Si el CI falla, el cambio no se considera válido.</p>
+<hr  />
+<h1><a class="anchor" id="lesson00_next"></a>
+Siguiente lección</h1>
+<p>Lesson 01 – Tipos de datos, scope y calificadores</p>
+<hr  />
+<h1><a class="anchor" id="lesson00_objectives"></a>
+Objetivos</h1>
+<p>Al finalizar esta lección, el estudiante será capaz de:</p><ul>
+<li>Comprender el propósito del repositorio cpp-foundations</li>
+<li>Configurar su entorno de trabajo para C++</li>
+<li>Instalar y verificar las herramientas necesarias</li>
+<li>Navegar correctamente la estructura del proyecto</li>
+<li>Usar la terminal para interactuar con Git y el sistema</li>
+<li>Seguir el flujo de trabajo esperado del curso</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="lesson00_about"></a>
+¿Qué es cpp-foundations?</h1>
+<p>cpp-foundations es un repositorio educativo diseñado para:</p>
+<ul>
+<li>Enseñar C++ desde fundamentos reales</li>
+<li>Promover buenas prácticas desde el inicio</li>
+<li>Simular un entorno de trabajo profesional</li>
+<li>Separar claramente código del alumno y código base</li>
+</ul>
+<p>Este repositorio NO es solo una colección de ejemplos, es un entorno de aprendizaje estructurado.</p>
+<hr  />
+<h1><a class="anchor" id="lesson00_environment"></a>
+Configuración del entorno de trabajo</h1>
+<p>Antes de escribir código, es necesario preparar el entorno.</p>
+<h2><a class="anchor" id="lesson00_os"></a>
+Sistemas operativos soportados</h2>
+<p>El curso está diseñado para funcionar en:</p>
+<ul>
+<li>Linux (recomendado)</li>
+<li>macOS</li>
+<li>Windows (usando WSL)</li>
+</ul>
+<p>Se espera que el estudiante tenga acceso a una terminal tipo UNIX.</p>
+<hr  />
+<h2><a class="anchor" id="lesson00_tools"></a>
+Instalación de herramientas necesarias</h2>
+<p>Las herramientas mínimas requeridas son:</p>
+<ul>
+<li>Un compilador de C++ (g++ o clang++)</li>
+<li>Git</li>
+<li>CMake</li>
+<li>Un editor de código</li>
+</ul>
+<hr  />
+<h3><a class="anchor" id="lesson00_tools_linux"></a>
+Linux</h3>
+<div class="fragment"><div class="line">sudo apt update</div>
+<div class="line">sudo apt install build-essential git cmake</div>
+</div><!-- fragment --><hr  />
+<h3><a class="anchor" id="lesson00_tools_macos"></a>
+macOS</h3>
+<p>Instalar Xcode Command Line Tools:</p>
+<div class="fragment"><div class="line">xcode-select --install</div>
+</div><!-- fragment --><p>Instalar Homebrew (si no está instalado):</p>
+<div class="fragment"><div class="line">/bin/bash -c <span class="stringliteral">&quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;</span></div>
+</div><!-- fragment --><p>Instalar herramientas:</p>
+<div class="fragment"><div class="line">brew install git cmake</div>
+</div><!-- fragment --><hr  />
+<h3><a class="anchor" id="lesson00_tools_windows"></a>
+Windows (WSL)</h3>
+<p>Se recomienda usar WSL con Ubuntu.</p>
+<p>Una vez dentro de WSL:</p>
+<div class="fragment"><div class="line">sudo apt update</div>
+<div class="line">sudo apt install build-essential git cmake</div>
+</div><!-- fragment --><hr  />
+<h2><a class="anchor" id="lesson00_verify"></a>
+Verificación de herramientas</h2>
+<p>Verifica que las herramientas estén instaladas correctamente:</p>
+<div class="fragment"><div class="line">g++ --version</div>
+<div class="line">git --version</div>
+<div class="line">cmake --version</div>
+</div><!-- fragment --><p>Si alguno de estos comandos falla, el entorno NO está listo.</p>
+<hr  />
+<h1><a class="anchor" id="lesson00_repo_structure"></a>
+Estructura del repositorio</h1>
+<p>La estructura general del repositorio es:</p>
+<div class="fragment"><div class="line">cpp-foundations/</div>
+<div class="line">├── student/</div>
+<div class="line">│   ├── include/</div>
+<div class="line">│   └── src/</div>
+<div class="line">├── docs/</div>
+<div class="line">│   └── topics/</div>
+<div class="line">├── README.md</div>
+<div class="line">└── CMakeLists.txt</div>
+</div><!-- fragment --><hr  />
+<h2><a class="anchor" id="lesson00_student_folder"></a>
+Carpeta student/</h2>
+<p>Esta es la ÚNICA carpeta que el estudiante debe modificar.</p>
+<div class="fragment"><div class="line">student/</div>
+<div class="line">├── include/   <span class="comment">// Headers del alumno</span></div>
+<div class="line">└── src/       <span class="comment">// Código fuente del alumno</span></div>
+</div><!-- fragment --><p>Reglas importantes:</p><ul>
+<li>Todo el código del alumno vive aquí</li>
+<li>No modificar archivos fuera de student/</li>
+<li>El CI valida esta regla automáticamente</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="lesson00_terminal"></a>
+Uso básico de la terminal</h1>
+<p>La terminal es una herramienta fundamental para este curso.</p>
+<h2><a class="anchor" id="lesson00_terminal_navigation"></a>
+Navegación básica</h2>
+<div class="fragment"><div class="line">pwd        <span class="comment">// muestra el directorio actual</span></div>
+<div class="line">ls         <span class="comment">// lista archivos</span></div>
+<div class="line">cd folder  <span class="comment">// cambia de directorio</span></div>
+<div class="line">cd ..      <span class="comment">// sube un nivel</span></div>
+</div><!-- fragment --><hr  />
+<h2><a class="anchor" id="lesson00_terminal_files"></a>
+Manejo de archivos</h2>
+<div class="fragment"><div class="line">mkdir test</div>
+<div class="line">touch main.cpp</div>
+<div class="line">rm archivo.cpp</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="lesson00_git"></a>
+Git básico (mínimo indispensable)</h1>
+<p>Clonar el repositorio:</p>
+<div class="fragment"><div class="line">git clone &lt;url-del-repositorio&gt;</div>
+<div class="line">cd cpp-foundations</div>
+</div><!-- fragment --><p>Ver el estado del repositorio:</p>
+<div class="fragment"><div class="line">git status</div>
+</div><!-- fragment --><p>Agregar cambios:</p>
+<div class="fragment"><div class="line">git add student/</div>
+</div><!-- fragment --><p>Crear un commit:</p>
+<div class="fragment"><div class="line">git commit -m <span class="stringliteral">&quot;Lesson 00: environment setup&quot;</span></div>
+</div><!-- fragment --><p>Subir cambios:</p>
+<div class="fragment"><div class="line">git push</div>
+</div><!-- fragment --><hr  />
+<h1><a class="anchor" id="lesson00_workflow"></a>
+Flujo de trabajo esperado</h1>
+<p>El flujo de trabajo estándar del curso es:</p>
+<ol type="1">
+<li>Leer la lección</li>
+<li>Implementar código en student/</li>
+<li>Probar localmente</li>
+<li>Crear commits pequeños y claros</li>
+<li>Subir cambios</li>
+<li>Verificar que el CI pase</li>
+</ol>
+<hr  />
+<h1><a class="anchor" id="lesson00_ci"></a>
+Continuous Integration (CI)</h1>
+<p>El repositorio utiliza GitHub Actions para verificar:</p>
+<ul>
+<li>Que solo se modifique student/</li>
+<li>Que el proyecto compile</li>
+<li>Que los reportes se generen correctamente</li>
+</ul>
+<p>Si el CI falla, el cambio NO se considera válido.</p>
+<p>Aprender a leer errores del CI es parte del curso.</p>
+<hr  />
+<h1><a class="anchor" id="lesson00_keyidea"></a>
+Idea clave</h1>
+<p>En este curso, el entorno, la estructura y el flujo de trabajo son tan importantes como el código.</p>
 <hr  />
 <h1><a class="anchor" id="lesson00_next"></a>
 Siguiente lección</h1>
