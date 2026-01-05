@@ -1,13 +1,183 @@
 /**
- * @mainpage Cpp Foundations
+ * @mainpage C++ Foundations
  *
- * @section welcome Bienvenido
- * Este repositorio contiene:
- * - Código base y ejercicios (carpeta `student/`)
- * - Pruebas unitarias (carpeta `tests/`)
- * - Reportes publicados (Unit Tests / Coverage / Doxygen)
- * - Material del curso en Doxygen (Topics)
+ * Bienvenido al curso **C++ Foundations**.
  *
- * @section start_here Empezar aquí
- * - Ve a: @ref course_cpp_foundations
+ * Este repositorio es un entorno educativo diseñado para enseñar C++
+ * desde fundamentos reales, combinando:
+ *
+ * - Lenguaje C++ moderno
+ * - Control de versiones con Git
+ * - Compilación profesional con CMake
+ * - Pruebas automatizadas
+ * - Documentación estructurada con Doxygen
+ *
+ * El objetivo del curso no es solo aprender sintaxis,
+ * sino aprender a **trabajar como ingeniero de software**.
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section mainpage_how_to_use Cómo usar este repositorio
+ *
+ * Este repositorio forma parte activa del curso.
+ *
+ * Reglas fundamentales:
+ * - El estudiante **solo debe modificar** la carpeta `student/`
+ * - Todo el contenido teórico vive en la documentación (Doxygen)
+ * - El flujo de trabajo con Git es parte de la evaluación
+ *
+ * El sistema de CI del repositorio valida automáticamente:
+ * - Que solo se modifique `student/`
+ * - Que el proyecto compile correctamente
+ * - Que las pruebas (si existen) pasen
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section mainpage_navigation Navegación de la documentación
+ *
+ * La documentación está organizada de la siguiente manera:
+ *
+ * - **Main Page** (esta página): visión general del curso
+ * - **Topics**: estructura jerárquica del curso
+ * - **Lesson Pages**: contenido detallado de cada lección
+ *
+ * Para navegar el curso:
+ * 1. Abre el menú lateral
+ * 2. Ve a la sección **Topics**
+ * 3. Ingresa al curso y a la lección correspondiente
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section mainpage_course Estructura del curso
+ *
+ * Todo el contenido del curso está agrupado bajo:
+ *
+ * - @ref cpp_course "C++ Foundations – Course"
+ *
+ * Dentro de este grupo encontrarás las lecciones del curso,
+ * organizadas de forma progresiva.
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section mainpage_lessons Lecciones
+ *
+ * @subsection mainpage_lesson00 Lesson 00 – Configuración del entorno de trabajo
+ *
+ * - @ref cpp_lesson_00 "Lesson 00 (grupo)"
+ * - @ref cpp_lesson_00_page "Configuración del entorno de trabajo (contenido)"
+ *
+ * En esta lección aprenderás a:
+ * - Preparar tu entorno de desarrollo
+ * - Instalar y verificar herramientas
+ * - Compilar el proyecto localmente con CMake
+ * - Ejecutar pruebas con CTest
+ * - Entender el flujo de trabajo del repositorio
+ *
+ * Esta lección es **obligatoria antes de escribir cualquier código**.
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @subsection mainpage_lesson01 Lesson 01 – Tipos de datos, scope y calificadores
+ *
+ * - @ref cpp_lesson_01 "Lesson 01 (grupo)"
+ * - @ref cpp_lesson_01_page "Tipos de datos, scope y calificadores"
+ *
+ * En esta lección aprenderás:
+ * - Tipos de datos fundamentales en C++
+ * - Alcance (scope) de variables
+ * - Uso correcto de `const` y `static`
+ * - Conceptos de duración de vida y visibilidad
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section mainpage_repo_structure Estructura del repositorio
+ *
+ * La estructura principal del repositorio es:
+ *
+ * @code
+ * cpp-foundations/
+ * ├── student/
+ * │   ├── include/
+ * │   └── src/
+ * ├── docs/
+ * │   ├── topics/
+ * │   └── mainpage.dox
+ * ├── CMakeLists.txt
+ * └── README.md
+ * @endcode
+ *
+ * Significado de las carpetas:
+ *
+ * - `student/`:
+ *   Código del alumno. ÚNICO lugar donde se debe programar.
+ *
+ * - `docs/`:
+ *   Documentación del curso generada con Doxygen.
+ *
+ * - `CMakeLists.txt`:
+ *   Sistema de compilación del proyecto.
+ *
+ * - `README.md`:
+ *   Información general del repositorio para GitHub (no es la Main Page).
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section mainpage_workflow Flujo de trabajo esperado
+ *
+ * El flujo de trabajo estándar del curso es:
+ *
+ * 1. Leer la lección correspondiente
+ * 2. Implementar código en `student/`
+ * 3. Compilar y probar localmente
+ * 4. Crear commits pequeños y claros
+ * 5. Subir cambios a GitHub
+ * 6. Verificar que el CI pase correctamente
+ *
+ * No seguir este flujo suele resultar en errores,
+ * reprocesos o fallas de evaluación.
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section mainpage_local_build Compilación y pruebas locales
+ *
+ * El proyecto se compila usando CMake.
+ *
+ * Flujo mínimo recomendado:
+ *
+ * @code
+ * mkdir -p build
+ * cmake -S . -B build
+ * cmake --build build
+ * ctest --test-dir build --output-on-failure
+ * @endcode
+ *
+ * El estudiante debe ser capaz de ejecutar estos comandos
+ * sin errores antes de avanzar en el curso.
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section mainpage_expectations Expectativas del curso
+ *
+ * Se espera que el estudiante:
+ *
+ * - Lea y entienda las lecciones antes de programar
+ * - No copie código sin comprenderlo
+ * - Use Git de forma consciente
+ * - Aprenda a interpretar errores de compilación
+ * - Priorice claridad y corrección sobre rapidez
+ *
+ * Este curso evalúa **fundamentos, no atajos**.
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section mainpage_final Nota final
+ *
+ * C++ es un lenguaje poderoso, pero exige disciplina.
+ *
+ * Este curso está diseñado para construir bases sólidas
+ * que permitan escalar a proyectos reales de ingeniería.
+ *
+ * Comienza con la @ref cpp_lesson_00_page "Lesson 00"
+ * antes de escribir una sola línea de código.
  */
+ 
