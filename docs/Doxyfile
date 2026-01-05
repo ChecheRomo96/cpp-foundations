@@ -31,3 +31,6 @@ EXPAND_ONLY_PREDEF     = NO
 
 # Useful defaults
 QUIET                  = YES
+
+
+DISABLE_INDEX          = NO
