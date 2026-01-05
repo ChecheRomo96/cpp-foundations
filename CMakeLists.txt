@@ -7,30 +7,31 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 option(ENABLE_TESTING "Enable unit tests" ON)
 option(ENABLE_COVERAGE "Enable coverage flags" OFF)
 
-# ------------------------------------------------------------
-# Coverage: apply flags PER TARGET (more reliable than globals)
-# ------------------------------------------------------------
-function(enable_coverage_for_target tgt)
-  if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-    target_compile_options(${tgt} PRIVATE -O0 -g --coverage)
-    target_link_options(${tgt} PRIVATE --coverage)
-  else()
-    message(WARNING "Coverage requested but compiler is not GNU/Clang")
-  endif()
-endfunction()
-
-add_library(FoundationsLib
-  student/src/MathUtils.cpp
-)
-
-target_include_directories(FoundationsLib PUBLIC
-  ${CMAKE_CURRENT_SOURCE_DIR}/student/include
-)
-
-if(ENABLE_COVERAGE)
+## --------------------------------------------------
+# Coverage flags (correct way)
+# --------------------------------------------------
+if(ENABLE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
   message(STATUS "Coverage enabled")
-  enable_coverage_for_target(FoundationsLib)
+
+  target_compile_options(FoundationsLib PRIVATE
+    -O0 -g --coverage
+  )
+
+  target_link_options(FoundationsLib PRIVATE
+    --coverage
+  )
+
+  if(ENABLE_TESTING)
+    target_compile_options(UnitTests PRIVATE
+      -O0 -g --coverage
+    )
+
+    target_link_options(UnitTests PRIVATE
+      --coverage
+    )
+  endif()
 endif()
+
 
 if(ENABLE_TESTING)
   include(CTest)
