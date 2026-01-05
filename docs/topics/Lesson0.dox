@@ -3,7 +3,10 @@
  * @ingroup cpp_lesson_00
  *
  * @brief Esta lección explica cómo preparar tu entorno para trabajar con el repositorio
- *        cpp-foundations y cómo compilar y ejecutar pruebas localmente.
+ *        cpp-foundations y cómo compilar, ejecutar pruebas y realizar el flujo inicial
+ *        de trabajo con Git de forma correcta.
+ *
+ * ----------------------------------------------------------------------
  *
  * @section lesson00_objectives Objetivos
  *
@@ -13,7 +16,8 @@
  * - Configurar un flujo local con CMake (build fuera del árbol)
  * - Compilar el proyecto en modo Debug/Release
  * - Ejecutar pruebas localmente usando CTest
- * - Diagnosticar errores comunes de compilación y configuración
+ * - Realizar su commit inicial correctamente
+ * - Entender las reglas de protección del repositorio
  *
  * ----------------------------------------------------------------------
  *
@@ -38,8 +42,6 @@
  * - macOS
  * - Windows usando WSL (recomendado sobre MSVC para este curso)
  *
- * Nota: Si usas Windows, el flujo recomendado es instalar WSL2 con Ubuntu.
- *
  * ----------------------------------------------------------------------
  *
  * @section lesson00_install Instalación de herramientas
@@ -48,55 +50,30 @@
  *
  * @code
  * sudo apt update
- * sudo apt install -y build-essential git cmake
- * @endcode
- *
- * Opcional (recomendado para debug):
- *
- * @code
- * sudo apt install -y gdb
+ * sudo apt install -y build-essential git cmake gdb
  * @endcode
  *
  * ----------------------------------------------------------------------
  *
  * @subsection lesson00_install_macos macOS
  *
- * Instala Xcode Command Line Tools:
- *
  * @code
  * xcode-select --install
- * @endcode
- *
- * Instala CMake y Git con Homebrew:
- *
- * @code
  * brew install git cmake
  * @endcode
- *
- * Opcional (depuración):
- * - lldb ya viene integrado con Xcode Command Line Tools
  *
  * ----------------------------------------------------------------------
  *
  * @subsection lesson00_install_windows Windows (WSL2 + Ubuntu)
  *
- * 1) Instala WSL2 y Ubuntu (desde Microsoft Store).
- * 2) Abre Ubuntu y ejecuta:
- *
  * @code
  * sudo apt update
- * sudo apt install -y build-essential git cmake
+ * sudo apt install -y build-essential git cmake gdb
  * @endcode
- *
- * Recomendación:
- * - Trabaja dentro del filesystem de WSL (ej. /home/<user>/projects)
- * - Evita compilar en /mnt/c/ para no degradar el rendimiento
  *
  * ----------------------------------------------------------------------
  *
  * @section lesson00_verify Verificación de instalación
- *
- * Ejecuta estos comandos y confirma que muestran versiones:
  *
  * @code
  * g++ --version
@@ -104,32 +81,45 @@
  * cmake --version
  * @endcode
  *
- * Si alguno falla:
- * - No continúes con el curso todavía
- * - Resuelve la instalación primero
- *
  * ----------------------------------------------------------------------
  *
  * @section lesson00_repo Clonar y preparar el repositorio
  *
- * Clonar:
- *
  * @code
- * git clone <url-del-repositorio>
+ * git clone https://github.com/ChecheRomo96/cpp-foundations.git
  * cd cpp-foundations
- * @endcode
- *
- * Verifica el estado:
- *
- * @code
  * git status
  * @endcode
  *
  * ----------------------------------------------------------------------
  *
- * @section lesson00_structure Estructura mínima del repositorio
+ * @section lesson00_course_guard Protección del curso (COURSE_GUARD_ENABLED)
  *
- * (Resumen de carpetas relevantes)
+ * Este repositorio incluye un mecanismo de protección del curso.
+ *
+ * La variable:
+ *
+ * @code
+ * COURSE_GUARD_ENABLED = true
+ * @endcode
+ *
+ * indica que el repositorio está operando en **modo curso**.
+ *
+ * Cuando esta variable está habilitada:
+ * - El CI valida que **solo se modifique la carpeta `student/`**
+ * - Cambios fuera de `student/` provocan falla automática
+ * - El flujo de trabajo del curso se hace cumplir estrictamente
+ *
+ * Esta variable **NO debe ser modificada por el estudiante**.
+ *
+ * Su propósito es:
+ * - Proteger la estructura del curso
+ * - Evitar modificaciones accidentales
+ * - Garantizar evaluaciones justas y consistentes
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section lesson00_structure Estructura mínima del repositorio
  *
  * @code
  * cpp-foundations/
@@ -139,68 +129,46 @@
  * ├── docs/
  * │   └── topics/
  * ├── CMakeLists.txt
+ * ├── .gitignore
  * └── README.md
  * @endcode
  *
  * Regla del curso:
- * - El estudiante solo modifica student/
+ * - El estudiante **solo modifica `student/`**
+ *
+ * ----------------------------------------------------------------------
+ *
+ * @section lesson00_gitignore Regla de archivos ignorados (.gitignore)
+ *
+ * Los archivos generados por la compilación **no deben versionarse**.
+ *
+ * En particular, la carpeta:
+ *
+ * @code
+ * build/
+ * @endcode
+ *
+ * debe estar listada en `.gitignore`.
+ *
+ * Ejemplo mínimo de `.gitignore` usado en este curso:
+ *
+ * @code
+ * build/
+ * build-*/
+ * *.o
+ * *.exe
+ * *.out
+ * CMakeCache.txt
+ * CMakeFiles/
+ * @endcode
+ *
+ * Subir archivos de `build/` invalida el commit.
  *
  * ----------------------------------------------------------------------
  *
  * @section lesson00_build Flujo de compilación local con CMake
  *
- * Este curso usa un flujo estándar:
- * - Configurar el proyecto en una carpeta de build
- * - Compilar desde esa carpeta
- * - Ejecutar pruebas
- *
- * @subsection lesson00_build_out_of_source Build fuera del árbol (recomendado)
- *
- * Desde la raíz del repo:
- *
  * @code
- * mkdir -p build
- * cmake -S . -B build
- * cmake --build build
- * @endcode
- *
- * Explicación:
- * - cmake -S . -B build : configura el proyecto (source = ., build = build)
- * - cmake --build build : compila
- *
- * ----------------------------------------------------------------------
- *
- * @subsection lesson00_build_debug_release Configuración Debug y Release
- *
- * CMake soporta modos de compilación. En generadores tipo Makefiles/Ninja
- * se define con CMAKE_BUILD_TYPE:
- *
- * Debug:
- *
- * @code
- * cmake -S . -B build-debug -DCMAKE_BUILD_TYPE=Debug
- * cmake --build build-debug
- * @endcode
- *
- * Release:
- *
- * @code
- * cmake -S . -B build-release -DCMAKE_BUILD_TYPE=Release
- * cmake --build build-release
- * @endcode
- *
- * Recomendación del curso:
- * - Debug para desarrollo y depuración
- * - Release para medir rendimiento (cuando aplique)
- *
- * ----------------------------------------------------------------------
- *
- * @subsection lesson00_build_clean Limpiar build (cuando sea necesario)
- *
- * Si cambias algo importante del entorno o el CMakeLists, a veces conviene borrar build:
- *
- * @code
- * rm -rf build
  * mkdir -p build
  * cmake -S . -B build
  * cmake --build build
@@ -210,174 +178,37 @@
  *
  * @section lesson00_tests Ejecutar pruebas localmente
  *
- * Este repositorio está diseñado para correr pruebas localmente si están configuradas.
- * El estándar de CMake para pruebas es CTest.
- *
- * @subsection lesson00_tests_build Asegurar que el proyecto está compilado
- *
- * @code
- * cmake -S . -B build
- * cmake --build build
- * @endcode
- *
- * @subsection lesson00_tests_ctest Ejecutar pruebas con CTest
- *
- * Ejecutar todas las pruebas:
- *
- * @code
- * ctest --test-dir build
- * @endcode
- *
- * Ejecutar con salida detallada (recomendado cuando falle algo):
- *
  * @code
  * ctest --test-dir build --output-on-failure
  * @endcode
  *
- * Ejecutar pruebas en paralelo (si tu máquina lo soporta):
- *
- * @code
- * ctest --test-dir build -j 4 --output-on-failure
- * @endcode
- *
- * Nota:
- * - Si "ctest" dice "No tests were found", entonces el proyecto todavía
- *   no tiene pruebas registradas o la opción de pruebas no está habilitada.
- *
  * ----------------------------------------------------------------------
  *
- * @section lesson00_run Ejecutar ejecutables localmente
+ * @section lesson00_git_workflow Commit inicial obligatorio
  *
- * Dependiendo de cómo esté definido el proyecto, los ejecutables suelen quedar en:
- * - build/ (o subcarpetas internas)
+ * Una vez que el proyecto:
+ * - Compila correctamente
+ * - Ejecuta pruebas sin errores
  *
- * Ejemplo genérico:
+ * el estudiante **debe realizar su commit inicial**.
  *
- * @code
- * ./build/<nombre_del_ejecutable>
- * @endcode
- *
- * Si no sabes el nombre del ejecutable:
- *
- * @code
- * ls build
- * @endcode
- *
- * Si el proyecto usa subdirectorios:
- *
- * @code
- * find build -maxdepth 3 -type f -perm -111
- * @endcode
- *
- * ----------------------------------------------------------------------
- *
- * @section lesson00_debug Depuración local (mínimo indispensable)
- *
- * @subsection lesson00_debug_gdb Linux/WSL (gdb)
- *
- * Compila en Debug y ejecuta:
- *
- * @code
- * gdb ./build-debug/<ejecutable>
- * @endcode
- *
- * Comandos útiles dentro de gdb:
- * - run
- * - bt
- * - break <archivo:linea>
- * - next
- * - step
- * - print <variable>
- *
- * ----------------------------------------------------------------------
- *
- * @subsection lesson00_debug_lldb macOS (lldb)
- *
- * Compila en Debug y ejecuta:
- *
- * @code
- * lldb ./build-debug/<ejecutable>
- * @endcode
- *
- * Comandos útiles dentro de lldb:
- * - run
- * - bt
- * - breakpoint set --file <archivo> --line <n>
- * - next
- * - step
- * - frame variable
- *
- * ----------------------------------------------------------------------
- *
- * @section lesson00_git_workflow Flujo de Git esperado (local)
- *
- * Ver estado:
+ * @subsection lesson00_git_initial_commit Pasos del commit inicial
  *
  * @code
  * git status
- * @endcode
- *
- * Agregar solo cambios del alumno:
- *
- * @code
  * git add student/
- * @endcode
- *
- * Commit con mensaje claro:
- *
- * @code
- * git commit -m "Lesson 00: local build and test workflow"
- * @endcode
- *
- * Subir cambios:
- *
- * @code
+ * git commit -m "Lesson 00: environment setup and local build verified"
  * git push
  * @endcode
  *
- * ----------------------------------------------------------------------
- *
- * @section lesson00_troubleshooting Errores comunes y soluciones rápidas
- *
- * @subsection lesson00_troubleshooting_cmake CMake no encuentra compilador
- *
- * Síntoma:
- * - CMake dice que no encuentra C/C++ compiler
- *
- * Solución:
- * - Instala build-essential (Linux/WSL)
- * - En macOS instala xcode-select --install
- * - Revisa que g++ --version funcione
- *
- * ----------------------------------------------------------------------
- *
- * @subsection lesson00_troubleshooting_cache CMake se queda "atorado" con config vieja
- *
- * Síntoma:
- * - Cambiaste cosas y no se reflejan
- *
- * Solución:
- * - Borra build y regenera
+ * Si aún no existen archivos en `student/`, crea uno mínimo:
  *
  * @code
- * rm -rf build
- * cmake -S . -B build
- * cmake --build build
+ * touch student/src/.init
+ * git add student/src/.init
+ * git commit -m "Lesson 00: initial student workspace"
+ * git push
  * @endcode
- *
- * ----------------------------------------------------------------------
- *
- * @subsection lesson00_troubleshooting_tests No aparecen pruebas
- *
- * Síntoma:
- * - ctest: No tests were found
- *
- * Posibles causas:
- * - Aún no hay pruebas registradas
- * - El proyecto requiere una opción para habilitar pruebas
- *
- * Acción:
- * - Revisa el README del repo o la lección correspondiente a pruebas
  *
  * ----------------------------------------------------------------------
  *
@@ -386,14 +217,21 @@
  * Antes de pasar a Lesson 01, el estudiante debe poder ejecutar:
  *
  * @code
- * git clone <url-del-repositorio>
+ * git clone https://github.com/ChecheRomo96/cpp-foundations.git
  * cd cpp-foundations
  * cmake -S . -B build
  * cmake --build build
  * ctest --test-dir build --output-on-failure
+ * git status
+ * git add student/
+ * git commit -m "Lesson 00: environment setup and local build verified"
+ * git push
  * @endcode
  *
- * Si esto funciona, el entorno está listo.
+ * Si todos estos pasos funcionan correctamente:
+ * - El entorno está listo
+ * - Git está correctamente configurado
+ * - El estudiante puede avanzar a la siguiente lección
  *
  * ----------------------------------------------------------------------
  *
