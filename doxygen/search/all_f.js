@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['scope_20y_20namespaces_0',['Lección 02 — Funciones, scope y namespaces',['../group__lesson__02__functions__namespaces.html',1,'']]],
-  ['static_20y_20buenas_20prácticas_20base_1',['Lección 04 — Memoria, const, static y buenas prácticas base',['../group__lesson__04__memory__const__static.html',1,'']]],
-  ['student_20work_20policy_2',['Student work policy',['../md_README.html#autotoc_md1',1,'']]],
-  ['sugerido_3',['Proyecto sugerido',['../group__lesson__05__procedural__miniproject.html#l05_project',1,'']]]
+  ['readme_2emd_0',['README.md',['../README_8md.html',1,'']]],
+  ['reglas_20de_20commits_1',['Reglas de commits',['../cpp_lesson_00.html#lesson00_commit_rules',1,'']]],
+  ['report_2',['CI coverage report',['../md_README.html#autotoc_md28',1,'']]],
+  ['repositorio_3',['Estructura del repositorio',['../cpp_lesson_00.html#lesson00_repo_structure',1,'']]],
+  ['repositorio_20y_20flujo_20de_20trabajo_4',['Lesson 00 – Introducción al repositorio y flujo de trabajo',['../cpp_lesson_00.html',1,'']]]
 ];

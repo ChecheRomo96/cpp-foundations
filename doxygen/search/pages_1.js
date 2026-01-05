@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['foundations_0',['foundations',['../index.html',1,'Cpp Foundations'],['../md_README.html',1,'cpp-foundations']]]
+  ['al_20repositorio_20y_20flujo_20de_20trabajo_0',['Lesson 00 – Introducción al repositorio y flujo de trabajo',['../cpp_lesson_00.html',1,'']]]
 ];

@@ -1,8 +1,7 @@
 <map id="Cpp Foundations (Curso)" name="Cpp Foundations (Curso)">
-<area shape="rect" id="Node000001" title="Material del curso, lecciones y entregables." alt="" coords="5,149,187,174"/>
-<area shape="rect" id="Node000002" href="$group__lesson__01__intro.html" title="Objetivos, teoría y actividad de la lección 01." alt="" coords="235,5,480,45"/>
-<area shape="rect" id="Node000003" href="$group__lesson__02__functions__namespaces.html" title="Objetivos, teoría y actividad de la lección 02." alt="" coords="267,69,448,109"/>
-<area shape="rect" id="Node000004" href="$group__lesson__03__headers__compilation.html" title="Objetivos, teoría y actividad de la lección 03." alt="" coords="272,134,443,189"/>
-<area shape="rect" id="Node000005" href="$group__lesson__04__memory__const__static.html" title="Objetivos, teoría y actividad de la lección 04." alt="" coords="270,213,445,267"/>
-<area shape="rect" id="Node000006" href="$group__lesson__05__procedural__miniproject.html" title="Integración: funciones + módulos + compilación." alt="" coords="271,291,443,346"/>
+<area shape="rect" id="Node000001" title="Material del curso, lecciones y entregables." alt="" coords="5,125,187,150"/>
+<area shape="rect" id="Node000002" href="$group__lesson__02__functions__namespaces.html" title="Objetivos, teoría y actividad de la lección 02." alt="" coords="235,5,416,45"/>
+<area shape="rect" id="Node000003" href="$group__lesson__03__headers__compilation.html" title="Objetivos, teoría y actividad de la lección 03." alt="" coords="240,70,411,125"/>
+<area shape="rect" id="Node000004" href="$group__lesson__04__memory__const__static.html" title="Objetivos, teoría y actividad de la lección 04." alt="" coords="238,149,413,203"/>
+<area shape="rect" id="Node000005" href="$group__lesson__05__procedural__miniproject.html" title="Integración: funciones + módulos + compilación." alt="" coords="239,227,411,282"/>
 </map>
