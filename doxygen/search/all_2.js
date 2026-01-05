@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['ci_20coverage_20report_0',['CI coverage report',['../md_README.html#autotoc_md3',1,'']]],
-  ['clamp_1',['Clamp',['../namespaceMathUtils.html#a7529e532eae0704dae2f68b037ae1a66',1,'MathUtils']]],
-  ['coverage_20report_2',['CI coverage report',['../md_README.html#autotoc_md3',1,'']]],
-  ['cpp_20foundations_3',['cpp foundations',['../index.html',1,'Cpp Foundations'],['../md_README.html',1,'cpp-foundations']]]
+  ['base_0',['Lección 04 — Memoria, const, static y buenas prácticas base',['../group__lesson__04__memory__const__static.html',1,'']]],
+  ['bienvenido_1',['Bienvenido',['../index.html#welcome',1,'']]],
+  ['buenas_20prácticas_20base_2',['Lección 04 — Memoria, const, static y buenas prácticas base',['../group__lesson__04__memory__const__static.html',1,'']]],
+  ['build_20test_3',['Local build + test',['../md_README.html#autotoc_md2',1,'']]]
 ];
