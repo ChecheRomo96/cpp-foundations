@@ -186,10 +186,10 @@ jobs:
       # Landing page (IMPORTANT: EOF must start at column 1)
       # --------------------------------------------------
       - name: Create index page
+        shell: bash
         run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          Path("site/index.html").write_text("""<!doctype html>
+          cat > site/index.html <<'EOF'
+          <!doctype html>
           <html>
           <head><meta charset="utf-8"><title>cpp-foundations Reports</title></head>
           <body>
@@ -201,28 +201,27 @@ jobs:
             </ul>
           </body>
           </html>
-          """, encoding="utf-8")
-          PY
-          
+          EOF
+
       # --------------------------------------------------
       # Debug Pages: confirm what will be published
       # --------------------------------------------------
-      - name: Debug Pages: context
+      - name: Debug Pages context
         run: |
           echo "REF: $GITHUB_REF"
           echo "EVENT: $GITHUB_EVENT_NAME"
 
-      - name: Debug Pages: list site tree
+      - name: Debug Pages list site tree
         run: |
           echo "===== site/ files (maxdepth 3) ====="
           find site -maxdepth 3 -type f | sort || true
 
-      - name: Debug Pages: disk usage
+      - name: Debug Pages disk usage
         run: |
           echo "===== site/ sizes ====="
           du -h site || true
 
-      - name: Debug Pages: preview index.html
+      - name: Debug Pages preview index.html
         run: |
           echo "===== site/index.html ====="
           sed -n '1,200p' site/index.html || echo "index.html missing"
