@@ -78,10 +78,7 @@ jobs:
         run: cmake -S . -B build \
           -DENABLE_TESTING=ON \
           -DENABLE_COVERAGE=ON \
-          -DCMAKE_BUILD_TYPE=Debug \
-          -DCMAKE_CXX_FLAGS="--coverage -O0 -g" \
-          -DCMAKE_EXE_LINKER_FLAGS="--coverage" \
-          -DCMAKE_SHARED_LINKER_FLAGS="--coverage"
+          -DCMAKE_BUILD_TYPE=Debug
 
       - name: Build
         run: cmake --build build
