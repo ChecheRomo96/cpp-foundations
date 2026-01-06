@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['fallar_20automáticamente_20si_20esta_20regla_20no_20se_20respeta_0',['y fallar automáticamente si esta regla no se respeta.',['../group__cpp__lesson__00.html#autotoc_md28',1,'']]],
+  ['fallido_20después_20de_20un_20merge_0',['Arreglar un CI fallido después de un merge',['../group__cpp__lesson__00.html#lesson00_git_fix',1,'']]],
   ['final_1',['final',['../group__cpp__lesson__00.html#lesson00_checklist',1,'Checklist final'],['../index.html#mainpage_final',1,'Nota final']]],
   ['flujo_20de_20trabajo_20esperado_2',['Flujo de trabajo esperado',['../index.html#mainpage_workflow',1,'']]],
   ['flujo_20fork_20upstream_3',['Lesson 00 – Configuración del entorno de trabajo y flujo Fork + Upstream',['../group__cpp__lesson__00.html',1,'']]],

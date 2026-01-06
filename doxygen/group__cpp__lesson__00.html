@@ -313,12 +313,6 @@ Ejemplo mínimo de &lt;tt&gt;.gitignore&lt;/tt&gt;</h2>
 <li>Los archivos específicos del editor o del sistema operativo no contaminen el repositorio</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="lesson00_gitignore_rule"></a>
-Regla del curso</h2>
-<p>Subir archivos de compilación, carpetas de build o cualquier archivo listado en <code>.gitignore</code> <b>invalida el commit</b>.</p>
-<p>El sistema de CI del curso está diseñado para detectar estas situaciones </p>
-<h1><a class="anchor" id="autotoc_md28"></a>
-y fallar automáticamente si esta regla no se respeta.</h1>
 <h1><a class="anchor" id="lesson00_build"></a>
 Compilación local con CMake</h1>
 <p>Flujo recomendado (build fuera del árbol):</p>
@@ -371,6 +365,46 @@ Checklist final</h1>
 <div class="line">git commit -m <span class="stringliteral">&quot;Lesson 00: environment setup and local build verified&quot;</span></div>
 <div class="line">git push</div>
 </div><!-- fragment --><p>Si todo lo anterior funciona, el entorno y el flujo están listos.</p>
+<hr  />
+<h1><a class="anchor" id="lesson00_git_fix"></a>
+Arreglar un CI fallido después de un merge</h1>
+<p>Es común que el CI falle cuando, después de hacer un merge o pull, se hayan incluido cambios fuera de la carpeta student/.</p>
+<p>Esto suele ocurrir por:</p><ul>
+<li>Usar <code>git add .</code></li>
+<li>Hacer un merge desde GitHub que arrastra archivos generados</li>
+<li>Resolver conflictos sin cuidado</li>
+</ul>
+<p>La siguiente secuencia de comandos permite <b>corregir el problema sin perder el trabajo del alumno</b>.</p>
+<hr  />
+<h2><a class="anchor" id="lesson00_git_fix_steps"></a>
+Secuencia de corrección estándar</h2>
+<p>Ejecuta estos comandos desde la raíz del repositorio:</p>
+<div class="fragment"><div class="line">git restore --staged .</div>
+<div class="line">git restore .</div>
+<div class="line">git add student/</div>
+<div class="line">git commit -m <span class="stringliteral">&quot;Fix: only student changes&quot;</span></div>
+<div class="line">git push</div>
+</div><!-- fragment --><p>Explicación:</p><ul>
+<li>git restore &ndash;staged . : quita todos los archivos del staging</li>
+<li>git restore . : revierte archivos modificados al estado del repositorio</li>
+<li>git add student/ : agrega únicamente el trabajo del alumno</li>
+<li>git commit : crea un commit limpio y válido</li>
+<li>git push : sube los cambios corregidos</li>
+</ul>
+<p>Si después de esto el CI sigue fallando, revisa el mensaje del workflow para identificar archivos adicionales fuera de student/.</p>
+<hr  />
+<h2><a class="anchor" id="lesson00_git_fix_rule"></a>
+Regla de oro</h2>
+<p>En este curso:</p>
+<ul>
+<li>SIEMPRE usar:</li>
+</ul>
+<div class="fragment"><div class="line">git add student/</div>
+</div><!-- fragment --><ul>
+<li>NUNCA usar:</li>
+</ul>
+<div class="fragment"><div class="line">git add .</div>
+</div><!-- fragment --><p>El CI está diseñado para fallar si esta regla no se cumple.</p>
 <hr  />
 <h1><a class="anchor" id="lesson00_next"></a>
 Siguiente lección</h1>
