@@ -13,7 +13,7 @@ var searchData=
   ['lesson01_5fintro_2edox_10',['Lesson01_Intro.dox',['../Lesson01__Intro_8dox.html',1,'']]],
   ['linux_20ubuntu_20debian_11',['Linux (Ubuntu/Debian)',['../group__cpp__lesson__00.html#lesson00_install_linux',1,'']]],
   ['local_12',['Clonar tu fork (trabajo local)',['../group__cpp__lesson__00.html#lesson00_repo_clone',1,'']]],
-  ['local_20build_20test_13',['Local build + test',['../md_README.html#autotoc_md33',1,'']]],
+  ['local_20build_20test_13',['Local build + test',['../md_README.html#autotoc_md35',1,'']]],
   ['local_20con_20cmake_14',['Compilación local con CMake',['../group__cpp__lesson__00.html#lesson00_build',1,'']]],
   ['locales_15',['locales',['../index.html#mainpage_local_build',1,'Compilación y pruebas locales'],['../group__cpp__lesson__00.html#lesson00_tests',1,'Ejecución de pruebas locales']]]
 ];

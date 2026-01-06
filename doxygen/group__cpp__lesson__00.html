@@ -225,17 +225,6 @@ Actualizar desde GitHub (Sync fork)</h2>
 <div class="fragment"><div class="line">git pull origin main</div>
 </div><!-- fragment --><p>Este método es útil si aún no dominas Git por terminal.</p>
 <hr  />
-<h1><a class="anchor" id="lesson00_course_guard"></a>
-Protección del curso</h1>
-<p>El repositorio opera en <b>modo curso</b> mediante la variable:</p>
-<div class="fragment"><div class="line">COURSE_GUARD_ENABLED = <span class="keyword">true</span></div>
-</div><!-- fragment --><p>Cuando está habilitada:</p>
-<ul>
-<li>El CI valida que solo se modifique la carpeta <code>student/</code></li>
-<li>Cambios fuera de <code>student/</code> provocan falla automática</li>
-</ul>
-<p>Esta variable <b>no debe ser modificada</b> por el estudiante.</p>
-<hr  />
 <h1><a class="anchor" id="lesson00_structure"></a>
 Estructura del repositorio</h1>
 <div class="fragment"><div class="line">cpp-foundations/</div>
@@ -251,12 +240,27 @@ Estructura del repositorio</h1>
 <li>El estudiante solo modifica <code>student/</code></li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="lesson00_gitignore"></a>
-Archivos ignorados (.gitignore)</h1>
-<p>Los archivos generados por compilación <b>no deben subirse</b> al repositorio.</p>
-<p>En particular:</p>
+ <h1><a class="anchor" id="lesson00_gitignore"></a>
+El archivo .gitignore</h1>
+<p>Durante el proceso de compilación, el proyecto genera archivos <b>temporales y específicos del entorno local</b> que <b>no forman parte del código fuente</b> y <b>no deben subirse al repositorio</b>.</p>
+<p>El archivo **<code>.gitignore</code>** le indica a Git qué archivos y carpetas deben ser ignorados, es decir, <b>no rastreados ni versionados</b>, incluso si existen en tu sistema local.</p>
+<p>El uso correcto de <code>.gitignore</code> es fundamental para:</p><ul>
+<li>Mantener el repositorio limpio y legible</li>
+<li>Evitar subir archivos dependientes de tu sistema</li>
+<li>Prevenir conflictos entre distintos entornos de desarrollo</li>
+<li>Reducir ruido innecesario en el historial de commits</li>
+</ul>
+<hr  />
+<h2><a class="anchor" id="lesson00_gitignore_build"></a>
+Archivos de compilación</h2>
+<p>En este curso, <b>los archivos generados por compilación deben permanecer locales</b>.</p>
+<p>En particular, la carpeta:</p>
 <div class="fragment"><div class="line">build/</div>
-</div><!-- fragment --><p>Ejemplo mínimo:</p>
+</div><!-- fragment --><p><b>nunca debe subirse al repositorio</b>.</p>
+<hr  />
+<h2><a class="anchor" id="lesson00_gitignore_example"></a>
+Ejemplo mínimo de .gitignore</h2>
+<p>Un <code>.gitignore</code> mínimo utilizado en este curso es:</p>
 <div class="fragment"><div class="line">build/</div>
 <div class="line">build-*/</div>
 <div class="line">*.o</div>
@@ -264,8 +268,18 @@ Archivos ignorados (.gitignore)</h1>
 <div class="line">*.exe</div>
 <div class="line">CMakeCache.txt</div>
 <div class="line">CMakeFiles/</div>
-</div><!-- fragment --><p>Subir archivos de build invalida el commit.</p>
+</div><!-- fragment --><p>Este archivo asegura que:</p><ul>
+<li>Los binarios y archivos objeto no se versionen</li>
+<li>Las carpetas de build no se incluyan en commits</li>
+<li>Los archivos generados por CMake permanezcan locales</li>
+</ul>
 <hr  />
+<h2><a class="anchor" id="lesson00_gitignore_rule"></a>
+Regla del curso</h2>
+<p>Subir archivos de compilación (por ejemplo, la carpeta <code>build/</code>) <b>invalida el commit</b>.</p>
+<p>El sistema de CI del curso está diseñado para detectar este tipo de errores </p>
+<h1><a class="anchor" id="autotoc_md28"></a>
+y fallar automáticamente si esta regla no se respeta.</h1>
 <h1><a class="anchor" id="lesson00_build"></a>
 Compilación local con CMake</h1>
 <p>Flujo recomendado (build fuera del árbol):</p>
