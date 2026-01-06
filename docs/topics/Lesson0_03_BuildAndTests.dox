@@ -1,0 +1,45 @@
+/**
+ * @page cpp_lesson_00_build_test_page Lesson 00.3 – Compilar y correr pruebas localmente
+ * @ingroup cpp_lesson_00
+ *
+ * @section lesson00_build Compilación local con CMake
+ * @code
+ * mkdir -p build
+ * cmake -S . -B build
+ * cmake --build build
+ * @endcode
+ *
+ * @section lesson00_tests Ejecutar pruebas locales
+ * @code
+ * ctest --test-dir build --output-on-failure
+ * @endcode
+ *
+ * @section lesson00_git_commit Commit inicial obligatorio
+ * @code
+ * git status
+ * git add student/
+ * git commit -m "Lesson 00: environment setup and local build verified"
+ * git push
+ * @endcode
+ *
+ * Si aún no existen archivos en `student/`, crea uno mínimo:
+ * @code
+ * touch student/src/.init
+ * git add student/src/.init
+ * git commit -m "Lesson 00: initial student workspace"
+ * git push
+ * @endcode
+ *
+ * @section lesson00_checklist Checklist final
+ * @code
+ * git clone https://github.com/<tu-usuario>/cpp-foundations.git
+ * cd cpp-foundations
+ * git remote add upstream https://github.com/ChecheRomo96/cpp-foundations.git
+ * cmake -S . -B build
+ * cmake --build build
+ * ctest --test-dir build --output-on-failure
+ * git add student/
+ * git commit -m "Lesson 00: environment setup and local build verified"
+ * git push
+ * @endcode
+ */

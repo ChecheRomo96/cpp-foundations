@@ -1,0 +1,46 @@
+/**
+ * @page cpp_lesson_00_git_workflow_page Lesson 00.2 – Workflow del curso: Fork + Upstream
+ * @ingroup cpp_lesson_00
+ *
+ * @section lesson00_repo_model Modelo del curso
+ * - Repositorio oficial (upstream): https://github.com/ChecheRomo96/cpp-foundations
+ * - Repositorio del estudiante (origin): fork del upstream
+ *
+ * @section lesson00_repo_fork Crear el fork (GitHub)
+ * 1) Entra al repositorio oficial del curso
+ * 2) Haz clic en **Fork**
+ * 3) Crea el fork en tu cuenta
+ *
+ * @section lesson00_repo_clone Clonar tu fork
+ * @code
+ * git clone https://github.com/<tu-usuario>/cpp-foundations.git
+ * cd cpp-foundations
+ * @endcode
+ *
+ * @section lesson00_repo_upstream Configurar upstream
+ * @code
+ * git remote add upstream https://github.com/ChecheRomo96/cpp-foundations.git
+ * git remote -v
+ * @endcode
+ *
+ * @section lesson00_repo_sync_terminal Actualizar desde terminal
+ * Recomendación: usar --no-edit para evitar el editor en el merge.
+ * @code
+ * git fetch upstream
+ * git merge upstream/main --no-edit
+ * @endcode
+ *
+ * @section lesson00_repo_sync_github Actualizar desde GitHub (Sync fork)
+ * 1) Entra a tu fork en GitHub
+ * 2) Haz clic en **Sync fork**
+ * 3) Selecciona **Update branch**
+ * Después actualiza local:
+ * @code
+ * git pull origin main
+ * @endcode
+ *
+ * @section lesson00_course_guard Protección del curso
+ * En CI, el guard está activado por defecto:
+ * - En forks: siempre ON
+ * - En upstream: puede override con repo variable
+ */

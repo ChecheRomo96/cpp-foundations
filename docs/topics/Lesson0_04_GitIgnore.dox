@@ -1,0 +1,66 @@
+/**
+ * @page cpp_lesson_00_gitignore_page Lesson 00.4 – .gitignore y archivos generados
+ * @ingroup cpp_lesson_00
+ *
+ * @section lesson00_gitignore Qué es .gitignore
+ * El archivo `.gitignore` indica a Git qué archivos y carpetas deben ser ignorados
+ * (no rastreados ni versionados), aunque existan en tu máquina.
+ *
+ * @section lesson00_gitignore_build Archivos de compilación
+ * En este curso, los archivos generados por compilación deben permanecer locales.
+ * En particular:
+ * @code
+ * build/
+ * @endcode
+ * nunca debe subirse al repositorio.
+ *
+ * @section lesson00_gitignore_example Ejemplo recomendado
+ * @code
+ * # --------------------------------------------------
+ * # Build directories
+ * # --------------------------------------------------
+ * build/
+ * cmake-build-*/
+ *
+ * # --------------------------------------------------
+ * # CMake generated files
+ * # --------------------------------------------------
+ * CMakeCache.txt
+ * CMakeFiles/
+ * cmake_install.cmake
+ * CTestTestfile.cmake
+ * Makefile
+ *
+ * # --------------------------------------------------
+ * # Coverage files (local only)
+ * # --------------------------------------------------
+ * *.gcda
+ * *.gcno
+ * *.gcov
+ * coverage.info
+ * coverage.filtered.info
+ * coverage_html/
+ *
+ * # --------------------------------------------------
+ * # IDE / Editor files
+ * # --------------------------------------------------
+ * .vscode/
+ * .idea/
+ * *.swp
+ * *.swo
+ *
+ * # --------------------------------------------------
+ * # Operating system files
+ * # --------------------------------------------------
+ * .DS_Store
+ * Thumbs.db
+ *
+ * # --------------------------------------------------
+ * # Doxygen output (generated)
+ * # --------------------------------------------------
+ * docs_out/
+ * @endcode
+ *
+ * @section lesson00_gitignore_rule Regla del curso
+ * Subir archivos generados (por ejemplo `build/`) invalida el commit.
+ */

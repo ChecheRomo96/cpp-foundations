@@ -1,0 +1,53 @@
+/**
+ * @page cpp_lesson_00_setup_page Lesson 00.1 – Instalación y verificación del entorno
+ * @ingroup cpp_lesson_00
+ *
+ * @section lesson00_objectives Objetivos
+ * - Instalar herramientas necesarias
+ * - Verificar versiones
+ * - Identificar un entorno compatible
+ *
+ * @section lesson00_prereq Requisitos mínimos
+ * Se requiere:
+ * - Terminal tipo UNIX (Linux/macOS o Windows con WSL2)
+ * - Compilador C++ (GCC o Clang)
+ * - Git
+ * - CMake
+ *
+ * @section lesson00_supported_os Sistemas operativos soportados
+ * - Linux (recomendado)
+ * - macOS
+ * - Windows con WSL2 (recomendado)
+ *
+ * @section lesson00_install Instalación de herramientas
+ *
+ * @subsection lesson00_install_linux Linux (Ubuntu/Debian)
+ * @code
+ * sudo apt update
+ * sudo apt install -y build-essential git cmake gdb
+ * @endcode
+ *
+ * @subsection lesson00_install_macos macOS
+ * @code
+ * xcode-select --install
+ * brew install git cmake
+ * @endcode
+ *
+ * @subsection lesson00_install_windows Windows (WSL2 + Ubuntu)
+ * @code
+ * sudo apt update
+ * sudo apt install -y build-essential git cmake gdb
+ * @endcode
+ *
+ * Nota:
+ * - Trabaja dentro de /home/<usuario>/ para mejor rendimiento.
+ *
+ * @section lesson00_verify Verificación del entorno
+ * @code
+ * g++ --version
+ * git --version
+ * cmake --version
+ * @endcode
+ *
+ * Si alguno falla, el entorno NO está listo.
+ */

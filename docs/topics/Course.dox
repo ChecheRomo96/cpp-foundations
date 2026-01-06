@@ -1,22 +1,31 @@
 /**
  * @defgroup cpp_course C++ Foundations – Course
- * @brief Índice del curso y contenedor de lecciones.
+ * @brief Curso de fundamentos de C++ con flujo de trabajo profesional y evaluación automatizada.
  *
- * Este grupo define el orden de navegación del curso.
+ * @details
+ * Bienvenido a **cpp-foundations**. Aquí encontrarás las lecciones organizadas por Topics.
+ *
+ * @par Lecciones
+ * - @ref cpp_lesson_00_page "Lesson 00 – Configuración del entorno y flujo Fork + Upstream"
+ * - @ref cpp_lesson_01_page "Lesson 01 – Tipos de datos, scope y calificadores"
  *
  * @{
  */
 
 /**
- * @defgroup cpp_lesson_00 Lesson 00
- * @ingroup cpp_course
- * @brief Introducción al repositorio y flujo de trabajo.
+ * @defgroup cpp_lesson_00 Lesson 00 – Setup + Workflow
+ * @brief Configuración del entorno, Git (Fork + Upstream), build local, pruebas y reglas del curso.
+ * @{
  */
+
+/** @} */ /* end of cpp_lesson_00 */
 
 /**
- * @defgroup cpp_lesson_01 Lesson 01
- * @ingroup cpp_course
- * @brief Tipos de datos, scope y calificadores.
+ * @defgroup cpp_lesson_01 Lesson 01 – Data types + Scope + Qualifiers
+ * @brief Tipos de datos, scope, const, static, etc.
+ * @{
  */
 
-/** @} */
+/** @} */ /* end of cpp_lesson_01 */
+
+/** @} */ /* end of cpp_course */

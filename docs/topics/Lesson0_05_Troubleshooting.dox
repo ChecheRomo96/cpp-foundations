@@ -1,0 +1,36 @@
+/**
+ * @page cpp_lesson_00_troubleshooting_page Lesson 00.5 – Troubleshooting y fixes comunes
+ * @ingroup cpp_lesson_00
+ *
+ * @section lesson00_merge_incomplete Merge incompleto (MERGE_HEAD exists)
+ * Si Git indica que hay un merge sin concluir:
+ *
+ * Terminar el merge (si no hay conflictos):
+ * @code
+ * git commit --no-edit
+ * @endcode
+ *
+ * Cancelar el merge (si quieres reiniciar):
+ * @code
+ * git merge --abort
+ * @endcode
+ *
+ * @section lesson00_ci_fix Arreglar un CI fallido por archivos fuera de student/
+ * @code
+ * git restore --staged .
+ * git restore .
+ * git add student/
+ * git commit -m "Fix: only student changes"
+ * git push
+ * @endcode
+ *
+ * @section lesson00_rule Regla de oro
+ * SIEMPRE:
+ * @code
+ * git add student/
+ * @endcode
+ * NUNCA:
+ * @code
+ * git add .
+ * @endcode
+ */
