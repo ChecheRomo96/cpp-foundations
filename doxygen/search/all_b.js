@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['mínimo_20de_20gitignore_0',['Ejemplo mínimo de .gitignore',['../group__cpp__lesson__00.html#lesson00_gitignore_example',1,'']]],
+  ['mínimo_20de_20tt_20gitignore_20tt_0',['Ejemplo mínimo de &lt;tt&gt;.gitignore&lt;/tt&gt;',['../group__cpp__lesson__00.html#lesson00_gitignore_example',1,'']]],
   ['mínimos_1',['Requisitos mínimos',['../group__cpp__lesson__00.html#lesson00_prereq',1,'']]],
   ['macos_2',['macOS',['../group__cpp__lesson__00.html#lesson00_install_macos',1,'']]],
   ['mainpage_2edox_3',['mainpage.dox',['../mainpage_8dox.html',1,'']]],

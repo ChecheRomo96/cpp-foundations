@@ -7,5 +7,6 @@ var searchData=
   ['trabajo_20esperado_4',['Flujo de trabajo esperado',['../index.html#mainpage_workflow',1,'']]],
   ['trabajo_20local_5',['Clonar tu fork (trabajo local)',['../group__cpp__lesson__00.html#lesson00_repo_clone',1,'']]],
   ['trabajo_20y_20flujo_20fork_20upstream_6',['Lesson 00 – Configuración del entorno de trabajo y flujo Fork + Upstream',['../group__cpp__lesson__00.html',1,'']]],
-  ['tu_20fork_20trabajo_20local_7',['Clonar tu fork (trabajo local)',['../group__cpp__lesson__00.html#lesson00_repo_clone',1,'']]]
+  ['tt_20gitignore_20tt_7',['Ejemplo mínimo de &lt;tt&gt;.gitignore&lt;/tt&gt;',['../group__cpp__lesson__00.html#lesson00_gitignore_example',1,'']]],
+  ['tu_20fork_20trabajo_20local_8',['Clonar tu fork (trabajo local)',['../group__cpp__lesson__00.html#lesson00_repo_clone',1,'']]]
 ];

@@ -1,7 +1,7 @@
 var searchData=
 [
   ['ejecución_20de_20pruebas_20locales_0',['Ejecución de pruebas locales',['../group__cpp__lesson__00.html#lesson00_tests',1,'']]],
-  ['ejemplo_20mínimo_20de_20gitignore_1',['Ejemplo mínimo de .gitignore',['../group__cpp__lesson__00.html#lesson00_gitignore_example',1,'']]],
+  ['ejemplo_20mínimo_20de_20tt_20gitignore_20tt_1',['Ejemplo mínimo de &lt;tt&gt;.gitignore&lt;/tt&gt;',['../group__cpp__lesson__00.html#lesson00_gitignore_example',1,'']]],
   ['el_20archivo_20gitignore_2',['El archivo .gitignore',['../group__cpp__lesson__00.html#lesson00_gitignore',1,'']]],
   ['el_20fork_20github_3',['Crear el fork (GitHub)',['../group__cpp__lesson__00.html#lesson00_repo_fork',1,'']]],
   ['entorno_4',['Verificación del entorno',['../group__cpp__lesson__00.html#lesson00_verify',1,'']]],
