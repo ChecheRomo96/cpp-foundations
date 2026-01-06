@@ -1,48 +1,53 @@
 /**
- * @page cpp_lesson_00_page Lesson 00 – Configuración del entorno de trabajo (local)
+ * @page cpp_lesson_00_page Lesson 00 – Configuración del entorno de trabajo y flujo Fork + Upstream
  * @ingroup cpp_lesson_00
  *
  * @brief Esta lección explica cómo preparar el entorno de trabajo para el curso
- *        cpp-foundations, cómo crear el repositorio del estudiante a partir del
- *        template, y cómo compilar, probar y versionar el proyecto correctamente.
+ *        cpp-foundations y cómo trabajar correctamente usando el modelo profesional
+ *        Fork + Upstream con GitHub, incluyendo compilación local, pruebas y CI.
  *
- * ----------------------------------------------------------------------
+ * ======================================================================
  *
  * @section lesson00_objectives Objetivos
  *
  * Al finalizar esta lección, el estudiante será capaz de:
- * - Crear su repositorio personal usando un template de GitHub
- * - Clonar y preparar el proyecto localmente
- * - Instalar y verificar las herramientas necesarias
- * - Compilar el proyecto usando CMake
- * - Ejecutar pruebas localmente con CTest
- * - Entender las reglas de protección del curso
- * - Realizar su commit inicial de forma correcta
  *
- * ----------------------------------------------------------------------
+ * - Instalar y verificar las herramientas necesarias para el curso
+ * - Crear un fork del repositorio oficial del curso
+ * - Clonar su fork y configurar el remoto upstream
+ * - Sincronizar actualizaciones del curso desde upstream
+ * - Compilar el proyecto localmente usando CMake (build fuera del árbol)
+ * - Ejecutar pruebas localmente usando CTest
+ * - Comprender y respetar la regla de protección del curso
+ * - Realizar su commit inicial correctamente
+ *
+ * ======================================================================
  *
  * @section lesson00_prereq Requisitos mínimos
  *
  * Se requiere:
- * - Acceso a una terminal tipo UNIX (Linux/macOS o Windows con WSL)
+ *
+ * - Acceso a una terminal tipo UNIX (Linux/macOS o Windows con WSL2)
  * - Un compilador de C++ (GCC o Clang)
  * - Git
  * - CMake
  *
  * Recomendado:
+ *
  * - Un editor de código (VS Code, CLion, etc.)
  * - Un depurador (gdb o lldb)
  *
- * ----------------------------------------------------------------------
+ * ======================================================================
  *
  * @section lesson00_supported_os Sistemas operativos soportados
  *
- * El curso funciona en:
+ * El curso está diseñado para funcionar en:
+ *
  * - Linux (recomendado)
  * - macOS
- * - Windows usando WSL2
+ * - Windows usando WSL2 (recomendado)
  *
- * ----------------------------------------------------------------------
+ * ======================================================================
  *
  * @section lesson00_install Instalación de herramientas
  *
@@ -71,9 +76,14 @@
  * sudo apt install -y build-essential git cmake gdb
  * @endcode
  *
- * ----------------------------------------------------------------------
+ * Nota:
+ * - Trabaja dentro de /home/<usuario>/ para mejor rendimiento.
  *
- * @section lesson00_verify Verificación de instalación
+ * ======================================================================
+ *
+ * @section lesson00_verify Verificación del entorno
+ *
+ * Verifica que las herramientas estén correctamente instaladas:
  *
  * @code
  * g++ --version
@@ -81,64 +91,130 @@
  * cmake --version
  * @endcode
  *
- * Si alguno de estos comandos falla, el entorno no está listo.
+ * Si alguno de estos comandos falla, el entorno NO está listo.
  *
- * ----------------------------------------------------------------------
+ * ======================================================================
  *
- * @section lesson00_repo_template Uso del repositorio como template
+ * @section lesson00_repo_model Modelo del curso: Fork + Upstream
  *
- * El repositorio cpp-foundations **se utiliza como template**.
+ * Este curso utiliza un **modelo profesional de trabajo con GitHub**:
  *
- * Este paso se realiza **una sola vez**, directamente en GitHub.
+ * - Existe un repositorio oficial del curso (upstream)
+ * - Cada estudiante trabaja en un fork personal
+ * - El estudiante puede recibir actualizaciones del curso
  *
- * Pasos:
- * 1. Ir al repositorio base:
+ * Repositorio oficial (upstream):
+ * - https://github.com/ChecheRomo96/cpp-foundations
+ *
+ * Este repositorio contiene:
+ * - CI (GitHub Actions)
+ * - CMake y configuración base
+ * - Documentación oficial del curso
+ * - Reglas y protecciones del curso
+ *
+ * ======================================================================
+ *
+ * @subsection lesson00_repo_fork Crear el fork (GitHub)
+ *
+ * 1. Entra al repositorio oficial del curso:
  *    https://github.com/ChecheRomo96/cpp-foundations
  *
- * 2. Hacer clic en **Use this template**
+ * 2. Haz clic en **Fork**
  *
- * 3. Crear el repositorio personal del curso
+ * 3. Crea el fork bajo tu cuenta de GitHub
  *
- * El repositorio resultante es **independiente** y pertenece al estudiante.
+ * Tu fork será tu repositorio de trabajo:
+ * - https://github.com/<tu-usuario>/cpp-foundations
  *
- * ----------------------------------------------------------------------
+ * ======================================================================
  *
- * @subsection lesson00_repo_clone Clonado del repositorio del estudiante
- *
- * Una vez creado el repositorio a partir del template, se clona localmente:
+ * @subsection lesson00_repo_clone Clonar tu fork (trabajo local)
  *
  * @code
  * git clone https://github.com/<tu-usuario>/cpp-foundations.git
  * cd cpp-foundations
- * git status
  * @endcode
  *
- * A partir de este punto, todo el trabajo se realiza sobre este repositorio.
+ * Verifica los remotos:
  *
- * ----------------------------------------------------------------------
+ * @code
+ * git remote -v
+ * @endcode
  *
- * @section lesson00_course_guard Protección del curso (COURSE_GUARD_ENABLED)
+ * Debes ver:
+ * - origin -> tu fork
  *
- * El repositorio incluye un mecanismo de protección del curso.
+ * ======================================================================
  *
- * La variable:
+ * @subsection lesson00_repo_upstream Configurar upstream
+ *
+ * Agrega el repositorio oficial como upstream:
+ *
+ * @code
+ * git remote add upstream https://github.com/ChecheRomo96/cpp-foundations.git
+ * git remote -v
+ * @endcode
+ *
+ * Debes ver:
+ * - origin   -> tu fork
+ * - upstream -> repositorio oficial
+ *
+ * ======================================================================
+ *
+ * @subsection lesson00_repo_sync_terminal Actualizar desde la terminal
+ *
+ * Cuando el instructor publique cambios:
+ *
+ * @code
+ * git fetch upstream
+ * git merge upstream/main
+ * @endcode
+ *
+ * Nota:
+ * - El estudiante solo debe modificar `student/`
+ * - Los conflictos deberían ser raros si se respeta esta regla
+ *
+ * ======================================================================
+ *
+ * @subsection lesson00_repo_sync_github Actualizar desde GitHub (Sync fork)
+ *
+ * GitHub ofrece una forma visual de sincronizar el fork:
+ *
+ * 1. Entra a tu fork:
+ *    https://github.com/<tu-usuario>/cpp-foundations
+ *
+ * 2. Haz clic en **Sync fork**
+ *
+ * 3. Selecciona **Update branch**
+ *
+ * Después, actualiza tu copia local:
+ *
+ * @code
+ * git pull origin main
+ * @endcode
+ *
+ * Este método es útil si aún no dominas Git por terminal.
+ *
+ * ======================================================================
+ *
+ * @section lesson00_course_guard Protección del curso
+ *
+ * El repositorio opera en **modo curso** mediante la variable:
  *
  * @code
  * COURSE_GUARD_ENABLED = true
  * @endcode
  *
- * indica que el repositorio está operando en **modo curso**.
- *
  * Cuando está habilitada:
+ *
  * - El CI valida que solo se modifique la carpeta `student/`
  * - Cambios fuera de `student/` provocan falla automática
- * - La estructura del curso queda protegida
  *
- * Esta variable **no debe ser modificada por el estudiante**.
+ * Esta variable **no debe ser modificada** por el estudiante.
  *
- * ----------------------------------------------------------------------
+ * ======================================================================
  *
- * @section lesson00_structure Estructura mínima del repositorio
+ * @section lesson00_structure Estructura del repositorio
  *
  * @code
  * cpp-foundations/
@@ -152,22 +228,20 @@
  * └── README.md
  * @endcode
  *
- * Regla del curso:
+ * Regla absoluta del curso:
  * - El estudiante solo modifica `student/`
  *
- * ----------------------------------------------------------------------
+ * ======================================================================
  *
- * @section lesson00_gitignore Regla de archivos ignorados (.gitignore)
+ * @section lesson00_gitignore Archivos ignorados (.gitignore)
  *
- * Los archivos generados por la compilación **no deben versionarse**.
+ * Los archivos generados por compilación **no deben subirse** al repositorio.
  *
  * En particular:
  *
  * @code
  * build/
  * @endcode
- *
- * debe estar listado en `.gitignore`.
  *
  * Ejemplo mínimo:
  *
@@ -183,7 +257,7 @@
  *
  * Subir archivos de build invalida el commit.
  *
- * ----------------------------------------------------------------------
+ * ======================================================================
  *
  * @section lesson00_build Compilación local con CMake
  *
@@ -195,23 +269,26 @@
  * cmake --build build
  * @endcode
  *
- * ----------------------------------------------------------------------
+ * ======================================================================
  *
  * @section lesson00_tests Ejecución de pruebas locales
+ *
+ * Ejecutar pruebas:
  *
  * @code
  * ctest --test-dir build --output-on-failure
  * @endcode
  *
- * ----------------------------------------------------------------------
+ * ======================================================================
  *
  * @section lesson00_git_commit Commit inicial obligatorio
  *
  * Una vez verificado que el proyecto:
- * - Compila correctamente
- * - Ejecuta pruebas sin errores
  *
- * el estudiante **debe realizar su commit inicial**.
+ * - Compila correctamente
+ * - Ejecuta pruebas sin errores (si existen)
+ *
+ * el estudiante debe realizar su **commit inicial**.
  *
  * @subsection lesson00_git_commit_steps Pasos del commit inicial
  *
@@ -231,30 +308,33 @@
  * git push
  * @endcode
  *
- * ----------------------------------------------------------------------
+ * ======================================================================
  *
  * @section lesson00_checklist Checklist final
  *
- * Antes de pasar a Lesson 01, el estudiante debe poder ejecutar:
+ * Antes de pasar a Lesson 01, el estudiante debe poder:
+ *
+ * 1. Crear un fork del repositorio oficial del curso
+ * 2. Clonar su fork
+ * 3. Configurar upstream
+ * 4. Compilar y probar localmente
+ * 5. Realizar su commit inicial
  *
  * @code
  * git clone https://github.com/<tu-usuario>/cpp-foundations.git
  * cd cpp-foundations
+ * git remote add upstream https://github.com/ChecheRomo96/cpp-foundations.git
  * cmake -S . -B build
  * cmake --build build
  * ctest --test-dir build --output-on-failure
- * git status
  * git add student/
  * git commit -m "Lesson 00: environment setup and local build verified"
  * git push
  * @endcode
  *
- * Si todos estos pasos funcionan correctamente:
- * - El entorno está listo
- * - Git está correctamente configurado
- * - El estudiante puede avanzar a la siguiente lección
+ * Si todo lo anterior funciona, el entorno y el flujo están listos.
  *
- * ----------------------------------------------------------------------
+ * ======================================================================
  *
  * @section lesson00_next Siguiente lección
  *
