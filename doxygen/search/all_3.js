@@ -1,30 +1,4 @@
 var searchData=
 [
-  ['cómo_20usar_20este_20repositorio_0',['Cómo usar este repositorio',['../index.html#mainpage_how_to_use',1,'']]],
-  ['c_20foundations_1',['C++ Foundations',['../index.html',1,'']]],
-  ['c_20foundations_20–_20course_2',['C++ Foundations – Course',['../group__cpp__course.html',1,'']]],
-  ['calificadores_3',['calificadores',['../group__cpp__lesson__01.html',1,'Lesson 01 – Tipos de datos, scope y calificadores'],['../index.html#mainpage_lesson01',1,'Lesson 01 – Tipos de datos, scope y calificadores']]],
-  ['checklist_20final_4',['Checklist final',['../group__cpp__lesson__00.html#lesson00_checklist',1,'']]],
-  ['ci_20coverage_20report_5',['CI coverage report',['../md_README.html#autotoc_md38',1,'']]],
-  ['ci_20fallido_20después_20de_20un_20merge_6',['Arreglar un CI fallido después de un merge',['../group__cpp__lesson__00.html#lesson00_git_fix',1,'']]],
-  ['clamp_7',['Clamp',['../namespaceMathUtils.html#a7529e532eae0704dae2f68b037ae1a66',1,'MathUtils']]],
-  ['clonar_20tu_20fork_20trabajo_20local_8',['Clonar tu fork (trabajo local)',['../group__cpp__lesson__00.html#lesson00_repo_clone',1,'']]],
-  ['cmake_9',['Compilación local con CMake',['../group__cpp__lesson__00.html#lesson00_build',1,'']]],
-  ['commit_20inicial_10',['Pasos del commit inicial',['../group__cpp__lesson__00.html#lesson00_git_commit_steps',1,'']]],
-  ['commit_20inicial_20obligatorio_11',['Commit inicial obligatorio',['../group__cpp__lesson__00.html#lesson00_git_commit',1,'']]],
-  ['compilación_12',['Archivos de compilación',['../group__cpp__lesson__00.html#lesson00_gitignore_build',1,'']]],
-  ['compilación_20local_20con_20cmake_13',['Compilación local con CMake',['../group__cpp__lesson__00.html#lesson00_build',1,'']]],
-  ['compilación_20y_20pruebas_20locales_14',['Compilación y pruebas locales',['../index.html#mainpage_local_build',1,'']]],
-  ['con_20cmake_15',['Compilación local con CMake',['../group__cpp__lesson__00.html#lesson00_build',1,'']]],
-  ['configuración_20del_20entorno_20de_20trabajo_16',['Lesson 00 – Configuración del entorno de trabajo',['../index.html#mainpage_lesson00',1,'']]],
-  ['configuración_20del_20entorno_20de_20trabajo_20y_20flujo_20fork_20upstream_17',['Lesson 00 – Configuración del entorno de trabajo y flujo Fork + Upstream',['../group__cpp__lesson__00.html',1,'']]],
-  ['configurar_20upstream_18',['Configurar upstream',['../group__cpp__lesson__00.html#lesson00_repo_upstream',1,'']]],
-  ['corrección_20estándar_19',['Secuencia de corrección estándar',['../group__cpp__lesson__00.html#lesson00_git_fix_steps',1,'']]],
-  ['course_20',['C++ Foundations – Course',['../group__cpp__course.html',1,'']]],
-  ['course_2edox_21',['Course.dox',['../Course_8dox.html',1,'']]],
-  ['coverage_20report_22',['CI coverage report',['../md_README.html#autotoc_md38',1,'']]],
-  ['cpp_20foundations_23',['cpp-foundations',['../md_README.html',1,'']]],
-  ['crear_20el_20fork_20github_24',['Crear el fork (GitHub)',['../group__cpp__lesson__00.html#lesson00_repo_fork',1,'']]],
-  ['curso_25',['curso',['../index.html#mainpage_course',1,'Estructura del curso'],['../index.html#mainpage_expectations',1,'Expectativas del curso']]],
-  ['curso_3a_20fork_20upstream_26',['Modelo del curso: Fork + Upstream',['../group__cpp__lesson__00.html#lesson00_repo_model',1,'']]]
+  ['3_20–_20compilar_20y_20correr_20pruebas_20localmente_0',['Lesson 00.3 – Compilar y correr pruebas localmente',['../group__cpp__lesson__00.html',1,'']]]
 ];

@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['pasos_20del_20commit_20inicial_0',['Pasos del commit inicial',['../group__cpp__lesson__00.html#lesson00_git_commit_steps',1,'']]],
-  ['policy_1',['policy',['../md_README.html#autotoc_md39',1,'Header policy'],['../md_README.html#autotoc_md36',1,'Student work policy']]],
-  ['pruebas_20locales_2',['pruebas locales',['../index.html#mainpage_local_build',1,'Compilación y pruebas locales'],['../group__cpp__lesson__00.html#lesson00_tests',1,'Ejecución de pruebas locales']]]
+  ['incompleto_20merge_5fhead_20exists_0',['Merge incompleto (MERGE_HEAD exists)',['../group__cpp__lesson__00.html#lesson00_merge_incomplete',1,'']]],
+  ['inicial_20obligatorio_1',['Commit inicial obligatorio',['../group__cpp__lesson__00.html#lesson00_git_commit',1,'']]],
+  ['instalación_20de_20herramientas_2',['Instalación de herramientas',['../group__cpp__lesson__00.html#lesson00_install',1,'']]],
+  ['instalación_20y_20verificación_20del_20entorno_3',['Lesson 00.1 – Instalación y verificación del entorno',['../group__cpp__lesson__00.html',1,'']]]
 ];

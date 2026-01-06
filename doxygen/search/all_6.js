@@ -1,13 +1,9 @@
 var searchData=
 [
-  ['fallido_20después_20de_20un_20merge_0',['Arreglar un CI fallido después de un merge',['../group__cpp__lesson__00.html#lesson00_git_fix',1,'']]],
-  ['final_1',['final',['../group__cpp__lesson__00.html#lesson00_checklist',1,'Checklist final'],['../index.html#mainpage_final',1,'Nota final']]],
-  ['flujo_20de_20trabajo_20esperado_2',['Flujo de trabajo esperado',['../index.html#mainpage_workflow',1,'']]],
-  ['flujo_20fork_20upstream_3',['Lesson 00 – Configuración del entorno de trabajo y flujo Fork + Upstream',['../group__cpp__lesson__00.html',1,'']]],
-  ['fork_4',['Actualizar desde GitHub (Sync fork)',['../group__cpp__lesson__00.html#lesson00_repo_sync_github',1,'']]],
-  ['fork_20github_5',['Crear el fork (GitHub)',['../group__cpp__lesson__00.html#lesson00_repo_fork',1,'']]],
-  ['fork_20trabajo_20local_6',['Clonar tu fork (trabajo local)',['../group__cpp__lesson__00.html#lesson00_repo_clone',1,'']]],
-  ['fork_20upstream_7',['fork upstream',['../group__cpp__lesson__00.html',1,'Lesson 00 – Configuración del entorno de trabajo y flujo Fork + Upstream'],['../group__cpp__lesson__00.html#lesson00_repo_model',1,'Modelo del curso: Fork + Upstream']]],
-  ['foundations_8',['foundations',['../index.html',1,'C++ Foundations'],['../md_README.html',1,'cpp-foundations']]],
-  ['foundations_20–_20course_9',['C++ Foundations – Course',['../group__cpp__course.html',1,'']]]
+  ['actualizar_20desde_20github_20sync_20fork_0',['Actualizar desde GitHub (Sync fork)',['../group__cpp__lesson__00.html#lesson00_repo_sync_github',1,'']]],
+  ['actualizar_20desde_20terminal_1',['Actualizar desde terminal',['../group__cpp__lesson__00.html#lesson00_repo_sync_terminal',1,'']]],
+  ['archivos_20de_20compilación_2',['Archivos de compilación',['../group__cpp__lesson__00.html#lesson00_gitignore_build',1,'']]],
+  ['archivos_20fuera_20de_20student_3',['Arreglar un CI fallido por archivos fuera de student/',['../group__cpp__lesson__00.html#lesson00_ci_fix',1,'']]],
+  ['archivos_20generados_4',['Lesson 00.4 – .gitignore y archivos generados',['../group__cpp__lesson__00.html',1,'']]],
+  ['arreglar_20un_20ci_20fallido_20por_20archivos_20fuera_20de_20student_5',['Arreglar un CI fallido por archivos fuera de student/',['../group__cpp__lesson__00.html#lesson00_ci_fix',1,'']]]
 ];

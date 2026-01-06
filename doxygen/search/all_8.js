@@ -1,5 +1,31 @@
 var searchData=
 [
-  ['header_20policy_0',['Header policy',['../md_README.html#autotoc_md39',1,'']]],
-  ['herramientas_1',['Instalación de herramientas',['../group__cpp__lesson__00.html#lesson00_install',1,'']]]
+  ['cómo_20usar_20este_20repositorio_0',['Cómo usar este repositorio',['../index.html#mainpage_how_to_use',1,'']]],
+  ['c_20foundations_1',['C++ Foundations',['../index.html',1,'']]],
+  ['c_20foundations_20–_20course_2',['C++ Foundations – Course',['../group__cpp__course.html',1,'']]],
+  ['calificadores_3',['calificadores',['../group__cpp__lesson__01.html',1,'Lesson 01 – Tipos de datos, scope y calificadores'],['../index.html#mainpage_lesson01',1,'Lesson 01 – Tipos de datos, scope y calificadores']]],
+  ['checklist_20final_4',['Checklist final',['../group__cpp__lesson__00.html#lesson00_checklist',1,'']]],
+  ['ci_20coverage_20report_5',['CI coverage report',['../md_README.html#autotoc_md13',1,'']]],
+  ['ci_20fallido_20por_20archivos_20fuera_20de_20student_6',['Arreglar un CI fallido por archivos fuera de student/',['../group__cpp__lesson__00.html#lesson00_ci_fix',1,'']]],
+  ['clamp_7',['Clamp',['../namespaceMathUtils.html#a7529e532eae0704dae2f68b037ae1a66',1,'MathUtils']]],
+  ['clonar_20tu_20fork_8',['Clonar tu fork',['../group__cpp__lesson__00.html#lesson00_repo_clone',1,'']]],
+  ['cmake_9',['Compilación local con CMake',['../group__cpp__lesson__00.html#lesson00_build',1,'']]],
+  ['commit_20inicial_20obligatorio_10',['Commit inicial obligatorio',['../group__cpp__lesson__00.html#lesson00_git_commit',1,'']]],
+  ['compilación_11',['Archivos de compilación',['../group__cpp__lesson__00.html#lesson00_gitignore_build',1,'']]],
+  ['compilación_20local_20con_20cmake_12',['Compilación local con CMake',['../group__cpp__lesson__00.html#lesson00_build',1,'']]],
+  ['compilación_20y_20pruebas_20locales_13',['Compilación y pruebas locales',['../index.html#mainpage_local_build',1,'']]],
+  ['compilar_20y_20correr_20pruebas_20localmente_14',['Lesson 00.3 – Compilar y correr pruebas localmente',['../group__cpp__lesson__00.html',1,'']]],
+  ['comunes_15',['Lesson 00.5 – Troubleshooting y fixes comunes',['../group__cpp__lesson__00.html',1,'']]],
+  ['con_20cmake_16',['Compilación local con CMake',['../group__cpp__lesson__00.html#lesson00_build',1,'']]],
+  ['configuración_20del_20entorno_20de_20trabajo_17',['Lesson 00 – Configuración del entorno de trabajo',['../index.html#mainpage_lesson00',1,'']]],
+  ['configuración_20del_20entorno_20y_20flujo_20fork_20upstream_18',['Lesson 00 – Configuración del entorno y flujo Fork + Upstream',['../group__cpp__lesson__00.html',1,'']]],
+  ['configurar_20upstream_19',['Configurar upstream',['../group__cpp__lesson__00.html#lesson00_repo_upstream',1,'']]],
+  ['correr_20pruebas_20localmente_20',['Lesson 00.3 – Compilar y correr pruebas localmente',['../group__cpp__lesson__00.html',1,'']]],
+  ['course_21',['C++ Foundations – Course',['../group__cpp__course.html',1,'']]],
+  ['course_2edox_22',['Course.dox',['../Course_8dox.html',1,'']]],
+  ['coverage_20report_23',['CI coverage report',['../md_README.html#autotoc_md13',1,'']]],
+  ['cpp_20foundations_24',['cpp-foundations',['../md_README.html',1,'']]],
+  ['crear_20el_20fork_20github_25',['Crear el fork (GitHub)',['../group__cpp__lesson__00.html#lesson00_repo_fork',1,'']]],
+  ['curso_26',['curso',['../index.html#mainpage_course',1,'Estructura del curso'],['../index.html#mainpage_expectations',1,'Expectativas del curso'],['../group__cpp__lesson__00.html#lesson00_repo_model',1,'Modelo del curso'],['../group__cpp__lesson__00.html#lesson00_course_guard',1,'Protección del curso'],['../group__cpp__lesson__00.html#lesson00_gitignore_rule',1,'Regla del curso']]],
+  ['curso_3a_20fork_20upstream_27',['Lesson 00.2 – Workflow del curso: Fork + Upstream',['../group__cpp__lesson__00.html',1,'']]]
 ];

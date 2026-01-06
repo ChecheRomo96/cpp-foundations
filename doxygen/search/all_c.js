@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['navegación_20de_20la_20documentación_0',['Navegación de la documentación',['../index.html#mainpage_navigation',1,'']]],
-  ['nota_20final_1',['Nota final',['../index.html#mainpage_final',1,'']]]
+  ['generados_0',['Lesson 00.4 – .gitignore y archivos generados',['../group__cpp__lesson__00.html',1,'']]],
+  ['github_1',['Crear el fork (GitHub)',['../group__cpp__lesson__00.html#lesson00_repo_fork',1,'']]],
+  ['github_20sync_20fork_2',['Actualizar desde GitHub (Sync fork)',['../group__cpp__lesson__00.html#lesson00_repo_sync_github',1,'']]],
+  ['gitignore_3',['Qué es .gitignore',['../group__cpp__lesson__00.html#lesson00_gitignore',1,'']]],
+  ['gitignore_20y_20archivos_20generados_4',['Lesson 00.4 – .gitignore y archivos generados',['../group__cpp__lesson__00.html',1,'']]]
 ];

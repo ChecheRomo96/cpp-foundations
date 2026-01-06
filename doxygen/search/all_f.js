@@ -1,8 +1,28 @@
 var searchData=
 [
-  ['readme_2emd_0',['README.md',['../README_8md.html',1,'']]],
-  ['regla_20de_20oro_1',['Regla de oro',['../group__cpp__lesson__00.html#lesson00_git_fix_rule',1,'']]],
-  ['report_2',['CI coverage report',['../md_README.html#autotoc_md38',1,'']]],
-  ['repositorio_3',['repositorio',['../index.html#mainpage_how_to_use',1,'Cómo usar este repositorio'],['../index.html#mainpage_repo_structure',1,'Estructura del repositorio'],['../group__cpp__lesson__00.html#lesson00_structure',1,'Estructura del repositorio']]],
-  ['requisitos_20mínimos_4',['Requisitos mínimos',['../group__cpp__lesson__00.html#lesson00_prereq',1,'']]]
+  ['la_20documentación_0',['Navegación de la documentación',['../index.html#mainpage_navigation',1,'']]],
+  ['lección_1',['Siguiente lección',['../group__cpp__lesson__00.html#lesson00_next',1,'']]],
+  ['lecciones_2',['Lecciones',['../index.html#mainpage_lessons',1,'']]],
+  ['lesson_2000_20–_20configuración_20del_20entorno_20de_20trabajo_3',['Lesson 00 – Configuración del entorno de trabajo',['../index.html#mainpage_lesson00',1,'']]],
+  ['lesson_2000_20–_20configuración_20del_20entorno_20y_20flujo_20fork_20upstream_4',['Lesson 00 – Configuración del entorno y flujo Fork + Upstream',['../group__cpp__lesson__00.html',1,'']]],
+  ['lesson_2000_20–_20setup_20workflow_5',['Lesson 00 – Setup + Workflow',['../group__cpp__lesson__00.html',1,'']]],
+  ['lesson_2000_201_20–_20instalación_20y_20verificación_20del_20entorno_6',['Lesson 00.1 – Instalación y verificación del entorno',['../group__cpp__lesson__00.html',1,'']]],
+  ['lesson_2000_202_20–_20workflow_20del_20curso_3a_20fork_20upstream_7',['Lesson 00.2 – Workflow del curso: Fork + Upstream',['../group__cpp__lesson__00.html',1,'']]],
+  ['lesson_2000_203_20–_20compilar_20y_20correr_20pruebas_20localmente_8',['Lesson 00.3 – Compilar y correr pruebas localmente',['../group__cpp__lesson__00.html',1,'']]],
+  ['lesson_2000_204_20–_20gitignore_20y_20archivos_20generados_9',['Lesson 00.4 – .gitignore y archivos generados',['../group__cpp__lesson__00.html',1,'']]],
+  ['lesson_2000_205_20–_20troubleshooting_20y_20fixes_20comunes_10',['Lesson 00.5 – Troubleshooting y fixes comunes',['../group__cpp__lesson__00.html',1,'']]],
+  ['lesson_2001_20–_20data_20types_20scope_20qualifiers_11',['Lesson 01 – Data types + Scope + Qualifiers',['../group__cpp__lesson__01.html',1,'']]],
+  ['lesson_2001_20–_20tipos_20de_20datos_20scope_20y_20calificadores_12',['lesson 01 – tipos de datos scope y calificadores',['../index.html#mainpage_lesson01',1,'Lesson 01 – Tipos de datos, scope y calificadores'],['../group__cpp__lesson__01.html',1,'Lesson 01 – Tipos de datos, scope y calificadores']]],
+  ['lesson0_2edox_13',['Lesson0.dox',['../Lesson0_8dox.html',1,'']]],
+  ['lesson01_5fintro_2edox_14',['Lesson01_Intro.dox',['../Lesson01__Intro_8dox.html',1,'']]],
+  ['lesson0_5f01_5fsetup_2edox_15',['Lesson0_01_Setup.dox',['../Lesson0__01__Setup_8dox.html',1,'']]],
+  ['lesson0_5f02_5fgitworkflow_2edox_16',['Lesson0_02_GitWorkflow.dox',['../Lesson0__02__GitWorkflow_8dox.html',1,'']]],
+  ['lesson0_5f03_5fbuildandtests_2edox_17',['Lesson0_03_BuildAndTests.dox',['../Lesson0__03__BuildAndTests_8dox.html',1,'']]],
+  ['lesson0_5f04_5fgitignore_2edox_18',['Lesson0_04_GitIgnore.dox',['../Lesson0__04__GitIgnore_8dox.html',1,'']]],
+  ['lesson0_5f05_5ftroubleshooting_2edox_19',['Lesson0_05_Troubleshooting.dox',['../Lesson0__05__Troubleshooting_8dox.html',1,'']]],
+  ['linux_20ubuntu_20debian_20',['Linux (Ubuntu/Debian)',['../group__cpp__lesson__00.html#lesson00_install_linux',1,'']]],
+  ['local_20build_20test_21',['Local build + test',['../md_README.html#autotoc_md12',1,'']]],
+  ['local_20con_20cmake_22',['Compilación local con CMake',['../group__cpp__lesson__00.html#lesson00_build',1,'']]],
+  ['locales_23',['locales',['../index.html#mainpage_local_build',1,'Compilación y pruebas locales'],['../group__cpp__lesson__00.html#lesson00_tests',1,'Ejecutar pruebas locales']]],
+  ['localmente_24',['Lesson 00.3 – Compilar y correr pruebas localmente',['../group__cpp__lesson__00.html',1,'']]]
 ];

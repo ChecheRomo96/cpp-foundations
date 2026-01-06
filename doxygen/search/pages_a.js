@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['–_20configuración_20del_20entorno_20de_20trabajo_20y_20flujo_20fork_20upstream_0',['Lesson 00 – Configuración del entorno de trabajo y flujo Fork + Upstream',['../group__cpp__lesson__00.html',1,'']]],
-  ['–_20tipos_20de_20datos_20scope_20y_20calificadores_1',['Lesson 01 – Tipos de datos, scope y calificadores',['../group__cpp__lesson__01.html',1,'']]]
+  ['fixes_20comunes_0',['Lesson 00.5 – Troubleshooting y fixes comunes',['../group__cpp__lesson__00.html',1,'']]],
+  ['flujo_20fork_20upstream_1',['Lesson 00 – Configuración del entorno y flujo Fork + Upstream',['../group__cpp__lesson__00.html',1,'']]],
+  ['fork_20upstream_2',['fork upstream',['../group__cpp__lesson__00.html',1,'Lesson 00 – Configuración del entorno y flujo Fork + Upstream'],['../group__cpp__lesson__00.html',1,'Lesson 00.2 – Workflow del curso: Fork + Upstream']]],
+  ['foundations_3',['foundations',['../index.html',1,'C++ Foundations'],['../md_README.html',1,'cpp-foundations']]]
 ];

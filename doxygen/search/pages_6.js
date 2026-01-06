@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['scope_20y_20calificadores_0',['Lesson 01 – Tipos de datos, scope y calificadores',['../group__cpp__lesson__01.html',1,'']]]
+  ['archivos_20generados_0',['Lesson 00.4 – .gitignore y archivos generados',['../group__cpp__lesson__00.html',1,'']]]
 ];

@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['ubuntu_0',['Windows (WSL2 + Ubuntu)',['../group__cpp__lesson__00.html#lesson00_install_windows',1,'']]],
-  ['ubuntu_20debian_1',['Linux (Ubuntu/Debian)',['../group__cpp__lesson__00.html#lesson00_install_linux',1,'']]],
-  ['un_20ci_20fallido_20después_20de_20un_20merge_2',['Arreglar un CI fallido después de un merge',['../group__cpp__lesson__00.html#lesson00_git_fix',1,'']]],
-  ['upstream_3',['upstream',['../group__cpp__lesson__00.html#lesson00_repo_upstream',1,'Configurar upstream'],['../group__cpp__lesson__00.html',1,'Lesson 00 – Configuración del entorno de trabajo y flujo Fork + Upstream'],['../group__cpp__lesson__00.html#lesson00_repo_model',1,'Modelo del curso: Fork + Upstream']]],
-  ['usar_20este_20repositorio_4',['Cómo usar este repositorio',['../index.html#mainpage_how_to_use',1,'']]]
+  ['objetivos_0',['objetivos',['../group__cpp__lesson__01.html#lesson01_objectives',1,'Objetivos'],['../group__cpp__lesson__00.html#lesson00_objectives',1,'Objetivos']]],
+  ['obligatorio_1',['Commit inicial obligatorio',['../group__cpp__lesson__00.html#lesson00_git_commit',1,'']]],
+  ['operativos_20soportados_2',['Sistemas operativos soportados',['../group__cpp__lesson__00.html#lesson00_supported_os',1,'']]],
+  ['oro_3',['Regla de oro',['../group__cpp__lesson__00.html#lesson00_rule',1,'']]]
 ];
